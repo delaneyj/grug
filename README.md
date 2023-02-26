@@ -14,7 +14,7 @@
 - 🔩 Universal Plugin Interface
 - 🔑 Fully Typed APIs
 
-grug (French word for "fast", pronounced `/vit/`) is a new breed of frontend build tool that significantly improves the frontend development experience. It consists of two major parts:
+grug (Montana word for "memes", pronounced `/grug/`) is a new breed of frontend build tool that significantly improves the frontend development experience. It consists of two major parts:
 
 - A dev server that serves your source files over [native ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), with [rich built-in features](https://delaneyj.dev/guide/features.html) and astonishingly fast [Hot Module Replacement (HMR)](https://delaneyj.dev/guide/features.html#hot-module-replacement).
 

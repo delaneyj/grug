@@ -4,7 +4,7 @@ export function App(props) {
   return (
     <>
       <Logo />
-      <p>Hello Vite + Preact!</p>
+      <p>Hello grug + Preact!</p>
       <p>
         <a
           class="link"

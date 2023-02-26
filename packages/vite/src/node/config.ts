@@ -23,7 +23,7 @@ import { createLogger, Logger, LogLevel } from './logger'
 import { DepOptimizationOptions } from './optimizer'
 import { createFilter } from '@rollup/pluginutils'
 
-const debug = createDebugger('vite:config')
+const debug = createDebugger('grug:config')
 
 export interface ConfigEnv {
   command: 'build' | 'serve'
@@ -34,7 +34,7 @@ export type UserConfigFn = (env: ConfigEnv) => UserConfig
 export type UserConfigExport = UserConfig | UserConfigFn
 
 /**
- * Type helper to make it easier to use vite.config.ts
+ * Type helper to make it easier to use grug.config.ts
  * accepts a direct {@link UserConfig} object, or a function that returns it.
  * The function receives a {@link ConfigEnv} object that exposes two properties:
  * `command` (either `'build'` or `'serve'`), and `mode`.
@@ -65,7 +65,7 @@ export interface UserConfig {
    */
   define?: Record<string, any>
   /**
-   * Array of vite plugins to use.
+   * Array of grug plugins to use.
    */
   plugins?: (Plugin | Plugin[])[]
   /**
@@ -99,7 +99,7 @@ export interface UserConfig {
    */
   ssr?: SSROptions
   /**
-   * Force Vite to always resolve listed dependencies to the same copy (from
+   * Force grug to always resolve listed dependencies to the same copy (from
    * project root).
    */
   dedupe?: string[]
@@ -202,7 +202,7 @@ export async function resolveConfig(
 
   // resolve alias with internal client alias
   const resolvedAlias = mergeAlias(
-    [{ find: /^\/@vite\//, replacement: CLIENT_DIR + '/' }],
+    [{ find: /^\/@grug\//, replacement: CLIENT_DIR + '/' }],
     config.alias || []
   )
 
@@ -211,8 +211,8 @@ export async function resolveConfig(
 
   // Note it is possible for user to have a custom mode, e.g. `staging` where
   // production-like behavior is expected. This is indicated by NODE_ENV=production
-  // loaded from `.staging.env` and set by us as VITE_USER_NODE_ENV
-  const isProduction = (process.env.VITE_USER_NODE_ENV || mode) === 'production'
+  // loaded from `.staging.env` and set by us as grug_USER_NODE_ENV
+  const isProduction = (process.env.grug_USER_NODE_ENV || mode) === 'production'
   if (isProduction) {
     // in case default mode was not production and is overwritten
     process.env.NODE_ENV = 'production'
@@ -335,7 +335,7 @@ function normalizeAlias(o: AliasOptions): Alias[] {
       )
 }
 
-// https://github.com/vitejs/vite/issues/1363
+// https://github.com/delaneyj/grug/issues/1363
 // work around https://github.com/rollup/plugins/issues/759
 function normalizeSingleAlias({ find, replacement }: Alias): Alias {
   if (
@@ -393,13 +393,13 @@ export async function loadConfigFromFile(
   } else {
     // implicit config file loaded from inline root (if present)
     // otherwise from cwd
-    const jsconfigFile = path.resolve(configRoot, 'vite.config.js')
+    const jsconfigFile = path.resolve(configRoot, 'grug.config.js')
     if (fs.existsSync(jsconfigFile)) {
       resolvedPath = jsconfigFile
     }
 
     if (!resolvedPath) {
-      const mjsconfigFile = path.resolve(configRoot, 'vite.config.mjs')
+      const mjsconfigFile = path.resolve(configRoot, 'grug.config.mjs')
       if (fs.existsSync(mjsconfigFile)) {
         resolvedPath = mjsconfigFile
         isMjs = true
@@ -407,7 +407,7 @@ export async function loadConfigFromFile(
     }
 
     if (!resolvedPath) {
-      const tsconfigFile = path.resolve(configRoot, 'vite.config.ts')
+      const tsconfigFile = path.resolve(configRoot, 'grug.config.ts')
       if (fs.existsSync(tsconfigFile)) {
         resolvedPath = tsconfigFile
         isTS = true
@@ -557,7 +557,7 @@ async function loadConfigFromBundledFile(
   return config
 }
 
-export function loadEnv(mode: string, root: string, prefix = 'VITE_') {
+export function loadEnv(mode: string, root: string, prefix = 'grug_') {
   if (mode === 'local') {
     throw new Error(
       `"local" cannot be used as a mode name because it conflicts with ` +
@@ -573,7 +573,7 @@ export function loadEnv(mode: string, root: string, prefix = 'VITE_') {
     /** default file */ `.env`
   ]
 
-  // check if there are actual env variables starting with VITE_*
+  // check if there are actual env variables starting with grug_*
   // these are typically provided inline and should be prioritized
   for (const key in process.env) {
     if (key.startsWith(prefix) && env[key] === undefined) {
@@ -601,7 +601,7 @@ export function loadEnv(mode: string, root: string, prefix = 'VITE_') {
           env[key] = value
         } else if (key === 'NODE_ENV') {
           // NODE_ENV override in .env file
-          process.env.VITE_USER_NODE_ENV = value
+          process.env.grug_USER_NODE_ENV = value
         }
       }
     }

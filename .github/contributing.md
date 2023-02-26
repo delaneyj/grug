@@ -1,6 +1,6 @@
-# Vite Contributing Guide
+# grug Contributing Guide
 
-Hi! We are really excited that you are interested in contributing to Vite. Before submitting your contribution, please make sure to take a moment and read through the following guidelines:
+Hi! We are really excited that you are interested in contributing to grug. Before submitting your contribution, please make sure to take a moment and read through the following guidelines:
 ## Pull Request Guidelines
 
 - Checkout a topic branch from a base branch, e.g. `main`, and merge back against that branch.
@@ -28,7 +28,7 @@ Hi! We are really excited that you are interested in contributing to Vite. Befor
 
 > The following section is mostly for maintainers who have commit access, but it's helpful to go through if you intend to make non-trivial contributions to the codebase.
 
-Vite aims to be lightweight, and this includes being aware of the number of npm dependencies and their size.
+grug aims to be lightweight, and this includes being aware of the number of npm dependencies and their size.
 
 We use rollup to pre-bundle most dependencies before publishing! Therefore most dependencies, even used in src code, should be added under `devDependencies` by default. This also creates a number of constraints that we need to be aware of in the codebase:
 
@@ -44,15 +44,15 @@ Most deps should be added to `devDependencies` even if they are needed at runtim
 
 - Type packages. Example: `@types/*`.
 - Deps that cannot be properly bundled due to binary files. Example: `esbuild`.
-- Deps that ships its own types and its type is used in vite's own public types. Example: `rollup`.
+- Deps that ships its own types and its type is used in grug's own public types. Example: `rollup`.
 
 Avoid deps that has large transitive dependencies that results in bloated size compared to the functionality it provides. For example, `http-proxy` itself plus `@types/http-proxy` is a little over 1MB in size, but `http-proxy-middleware` pulls in a ton of dependencies that makes it 7MB(!) when a minimal custom middleware on top of `http-proxy` only requires a couple lines of code.
 
 ### Ensure type support
 
-Vite aims to be fully usable as a dependency in a TypeScript project (e.g. it should provide proper typings for VitePress), and also in `vite.config.ts`. This means technically a dependency whose types are exposed needs to be part of `dependencies` instead of `devDependencies`. However, these means we won't be able to bundle it.
+grug aims to be fully usable as a dependency in a TypeScript project (e.g. it should provide proper typings for grugPress), and also in `grug.config.ts`. This means technically a dependency whose types are exposed needs to be part of `dependencies` instead of `devDependencies`. However, these means we won't be able to bundle it.
 
-To get around this, we inline some of these dependencies' types in `packages/vite/types`. This way we can still expose the typing but bundle the dependency's source code.
+To get around this, we inline some of these dependencies' types in `packages/grug/types`. This way we can still expose the typing but bundle the dependency's source code.
 
 ### Think before adding yet another option
 

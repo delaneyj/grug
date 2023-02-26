@@ -1,7 +1,7 @@
-const reactRefresh = require('@vitejs/plugin-react-refresh')
+const reactRefresh = require('@delaneyj/plugin-react-refresh')
 
 /**
- * @type {import('vite').UserConfig}
+ * @type {import('grug').UserConfig}
  */
 module.exports = {
   plugins: [reactRefresh()],

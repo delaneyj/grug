@@ -2,13 +2,13 @@ try {
   require.resolve('@vue/compiler-sfc')
 } catch (e) {
   throw new Error(
-    '@vitejs/plugin-vue requires @vue/compiler-sfc to be present in the dependency ' +
+    '@delaneyj/plugin-vue requires @vue/compiler-sfc to be present in the dependency ' +
       'tree.'
   )
 }
 
 import fs from 'fs'
-import { Plugin, ViteDevServer } from 'vite'
+import { Plugin, grugDevServer } from 'grug'
 import { createFilter } from '@rollup/pluginutils'
 import {
   SFCBlock,
@@ -51,7 +51,7 @@ export interface Options {
 
 export interface ResolvedOptions extends Options {
   root: string
-  devServer?: ViteDevServer
+  devServer?: grugDevServer
 }
 
 export default function vuePlugin(rawOptions: Options = {}): Plugin {
@@ -67,7 +67,7 @@ export default function vuePlugin(rawOptions: Options = {}): Plugin {
   )
 
   return {
-    name: 'vite:vue',
+    name: 'grug:vue',
 
     handleHotUpdate(ctx) {
       if (!filter(ctx.file)) {

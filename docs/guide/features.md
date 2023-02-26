@@ -1,12 +1,12 @@
 # Features
 
-At the very basic level, developing using Vite is not that much different from using a static file server. However, Vite provides many enhancements over native ESM imports to support
+At the very basic level, developing using grug is not that much different from using a static file server. However, grug provides many enhancements over native ESM imports to support
 
 ## Hot Module Replacement
 
-Vite provides an [HMR API](./api-hmr) over native ESM. Frameworks with HMR capabilities can leverage the API to provide instant, precise updates without reloading the page or blowing away application state. Vite provides first-party HMR integrations for [Vue Single File Components](https://github.com/vitejs/vite/tree/main/packages/plugin-vue) and [React Fast Refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react-refresh). There are also official integrations for Preact via [@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite).
+grug provides an [HMR API](./api-hmr) over native ESM. Frameworks with HMR capabilities can leverage the API to provide instant, precise updates without reloading the page or blowing away application state. grug provides first-party HMR integrations for [Vue Single File Components](https://github.com/delaneyj/grug/tree/main/packages/plugin-vue) and [React Fast Refresh](https://github.com/delaneyj/grug/tree/main/packages/plugin-react-refresh). There are also official integrations for Preact via [@prefresh/grug](https://github.com/JoviDeCroock/prefresh/tree/main/packages/grug).
 
-Note you don't need to manually set these up - when you [create an app via `@vitejs/create-app`](./), the selected templates would have these pre-configured for you already.
+Note you don't need to manually set these up - when you [create an app via `@delaneyj/create-app`](./), the selected templates would have these pre-configured for you already.
 
 ## NPM Dependency Resolving
 
@@ -16,7 +16,7 @@ Native ES imports do not support bare module imports like the following:
 import { someMethod } from 'my-dep'
 ```
 
-The above will throw an error in the browser. Vite detects such bare module imports in all served `.js` files and rewrites them to resolved paths like `/node_modules/my-dep/dist/my-dep.js?v=1.0.0` so that the browser can handle them properly.
+The above will throw an error in the browser. grug detects such bare module imports in all served `.js` files and rewrites them to resolved paths like `/node_modules/my-dep/dist/my-dep.js?v=1.0.0` so that the browser can handle them properly.
 
 **Dependency Caching**
 
@@ -24,22 +24,22 @@ Resolved dependency requests are strongly cached with headers `max-age=31536000,
 
 ## TypeScript
 
-Vite supports importing `.ts` files out of the box.
+grug supports importing `.ts` files out of the box.
 
-Vite only performs transpilation on `.ts` files and does **NOT** perform type checking. It assumes type checking is taken care of by your IDE and build process (you can run `tsc --noEmit` in the build script).
+grug only performs transpilation on `.ts` files and does **NOT** perform type checking. It assumes type checking is taken care of by your IDE and build process (you can run `tsc --noEmit` in the build script).
 
-Vite uses [esbuild](https://github.com/evanw/esbuild) to transpile TypeScript into JavaScript which is about 20~30x faster than vanilla `tsc`, and HMR updates can reflect in the browser in under 50ms.
+grug uses [esbuild](https://github.com/evanw/esbuild) to transpile TypeScript into JavaScript which is about 20~30x faster than vanilla `tsc`, and HMR updates can reflect in the browser in under 50ms.
 
 Note that because `esbuild` only performs transpilation without type information, it doesn't support certain features like const enum and implicit type-only imports. You must set `"isolatedModules": true` in your `tsconfig.json` under `compilerOptions` so that TS will warn you against the features that do not work with isolated transpilation.
 
 ### Client Types
 
-Vite's default types are for its Node.js API. To shim the environment of client side code in a Vite application, add `vite/client` to `compilerOptions.types` of your `tsconfig`:
+grug's default types are for its Node.js API. To shim the environment of client side code in a grug application, add `grug/client` to `compilerOptions.types` of your `tsconfig`:
 
 ```json
 {
   "compilerOptions": {
-    "types": ["vite/client"]
+    "types": ["grug/client"]
   }
 }
 ```
@@ -47,27 +47,27 @@ Vite's default types are for its Node.js API. To shim the environment of client 
 This will provide the following type shims:
 
 - Asset imports (e.g. importing an `.svg` file)
-- Types for the Vite-injected [env variables](./env-and-mode#env-variables) on `import.meta.env`
+- Types for the grug-injected [env variables](./env-and-mode#env-variables) on `import.meta.env`
 - Types for the [HMR API](./api-hmr) on `import.meta.hot`
 
 ## Vue
 
-Vite provides first-class Vue support:
+grug provides first-class Vue support:
 
-- Vue 3 SFC support via [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
-- Vue 3 JSX support via [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx)
-- Vue 2 support via [underfin/vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)
+- Vue 3 SFC support via [@delaneyj/plugin-vue](https://github.com/delaneyj/grug/tree/main/packages/plugin-vue)
+- Vue 3 JSX support via [@delaneyj/plugin-vue-jsx](https://github.com/delaneyj/grug/tree/main/packages/plugin-vue-jsx)
+- Vue 2 support via [underfin/grug-plugin-vue2](https://github.com/underfin/grug-plugin-vue2)
 
 ## JSX
 
 `.jsx` and `.tsx` files are also supported out of the box. JSX transpilation is also handled via [ESBuild](https://esbuild.github.io), and defaults to the React 16 flavor. React 17 style JSX support in ESBuild is tracked [here](https://github.com/evanw/esbuild/issues/334).
 
-Vue users should use the official [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx) plugin, which provides Vue 3 specific features including HMR, global component resolving, directives and slots.
+Vue users should use the official [@delaneyj/plugin-vue-jsx](https://github.com/delaneyj/grug/tree/main/packages/plugin-vue-jsx) plugin, which provides Vue 3 specific features including HMR, global component resolving, directives and slots.
 
 If not using JSX with React or Vue, custom `jsxFactory` and `jsxFragment` can be configured using the [`esbuild` option](/config/#esbuild). For example for Preact:
 
 ```js
-// vite.config.js
+// grug.config.js
 export default {
   esbuild: {
     jsxFactory: 'h',
@@ -78,10 +78,10 @@ export default {
 
 More details in [ESBuild docs](https://esbuild.github.io/content-types/#jsx).
 
-You can inject the JSX helpers using `jsxInject` (which is a Vite-only option) to avoid manual imports:
+You can inject the JSX helpers using `jsxInject` (which is a grug-only option) to avoid manual imports:
 
 ```js
-// vite.config.js
+// grug.config.js
 export default {
   esbuild: {
     jsxInject: `import React from 'react'`
@@ -117,9 +117,9 @@ CSS modules behavior can be configured via the [`css.modules` option](/config/#c
 
 ### CSS Pre-processors
 
-Because Vite targets modern browsers only, it is recommended to use native CSS variables with PostCSS plugins that implement CSSWG drafts (e.g. [postcss-nesting](https://github.com/jonathantneal/postcss-nesting)) and author plain, future-standards-compliant CSS.
+Because grug targets modern browsers only, it is recommended to use native CSS variables with PostCSS plugins that implement CSSWG drafts (e.g. [postcss-nesting](https://github.com/jonathantneal/postcss-nesting)) and author plain, future-standards-compliant CSS.
 
-That said, Vite does provide built-in support for `.scss`, `.sass`, `.less`, `.styl` and `.stylus` files. There is no need to install Vite-specific plugins for them, but the corresponding pre-processor itself must be installed as a peer dependency:
+That said, grug does provide built-in support for `.scss`, `.sass`, `.less`, `.styl` and `.stylus` files. There is no need to install grug-specific plugins for them, but the corresponding pre-processor itself must be installed as a peer dependency:
 
 - `.scss` and `.sass`: [sass](https://www.npmjs.com/package/sass)
 - `.less`: [less](https://www.npmjs.com/package/less)
@@ -183,7 +183,7 @@ import { field } from './example.json'
 
 > Requires ^2.0.0-beta.17
 
-Vite supports importing multiple modules from the file system via the special `import.meta.glob` function:
+grug supports importing multiple modules from the file system via the special `import.meta.glob` function:
 
 ```js
 const modules = import.meta.glob('./dir/*.js')
@@ -192,7 +192,7 @@ const modules = import.meta.glob('./dir/*.js')
 The above will be transformed into the following:
 
 ```js
-// code produced by vite
+// code produced by grug
 const modules = {
   './dir/foo.js': () => import('./dir/foo.js'),
   './dir/bar.js': () => import('./dir/bar.js')
@@ -218,7 +218,7 @@ const modules = import.meta.globEager('./dir/*.js')
 The above will be transformed into the following:
 
 ```js
-// code produced by vite
+// code produced by grug
 import * as __glob__0_0 from './dir/foo.js'
 import * as __glob__0_1 from './dir/bar.js'
 const modules = {
@@ -229,7 +229,7 @@ const modules = {
 
 Note that:
 
-- This is a Vite-only feature and is not a web or ES standard.
+- This is a grug-only feature and is not a web or ES standard.
 - The glob patterns must be relative and start with `.`.
 - The glob matching is done via `fast-glob` - check out its documentation for [supported glob patterns](https://github.com/mrmlnc/fast-glob#pattern-syntax).
 
@@ -285,19 +285,19 @@ import MyWorker from './worker?worker&inline'
 
 ### Dynamic Import Polyfill
 
-Vite uses ES dynamic import as code-splitting points. The generated code will also use dynamic imports to load the async chunks. However, native ESM dynamic imports support landed later than ESM via script tags and there is a browser support discrepancy between the two features. Vite automatically injects a light-weight [dynamic import polyfill](https://github.com/GoogleChromeLabs/dynamic-import-polyfill) to ease out that difference.
+grug uses ES dynamic import as code-splitting points. The generated code will also use dynamic imports to load the async chunks. However, native ESM dynamic imports support landed later than ESM via script tags and there is a browser support discrepancy between the two features. grug automatically injects a light-weight [dynamic import polyfill](https://github.com/GoogleChromeLabs/dynamic-import-polyfill) to ease out that difference.
 
 If you know you are only targeting browsers with native dynamic import support, you can explicitly disable this feature via [`build.polyfillDynamicImport`](/config/#build-polyfilldynamicimport).
 
 ### CSS Code Splitting
 
-Vite automatically extracts the CSS used by modules in an async chunk and generate a separate file for it. The CSS file is automatically loaded via a `<link>` tag when the associated async chunk is loaded, and the async chunk is guaranteed to only be evaluated after the CSS is loaded to avoid [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content#:~:text=A%20flash%20of%20unstyled%20content,before%20all%20information%20is%20retrieved.).
+grug automatically extracts the CSS used by modules in an async chunk and generate a separate file for it. The CSS file is automatically loaded via a `<link>` tag when the associated async chunk is loaded, and the async chunk is guaranteed to only be evaluated after the CSS is loaded to avoid [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content#:~:text=A%20flash%20of%20unstyled%20content,before%20all%20information%20is%20retrieved.).
 
 If you'd rather have all the CSS extracted into a single file, you can disable CSS code splitting by setting [`build.cssCodeSplit`](/config/#build-csscodesplit) to `false`.
 
 ### Preload Directives Generation
 
-Vite automatically generates `<link rel="modulepreload">` directives for entry chunks and their direct imports in the built HTML.
+grug automatically generates `<link rel="modulepreload">` directives for entry chunks and their direct imports in the built HTML.
 
 ### Async Chunk Loading Optimization
 
@@ -311,10 +311,10 @@ In the non-optimized scenarios, when async chunk `A` is imported, the browser wi
 Entry ---> A ---> C
 ```
 
-Vite automatically rewrites code-split dynamic import calls with a preload step so that when `A` is requested, `C` is fetched **in parallel**:
+grug automatically rewrites code-split dynamic import calls with a preload step so that when `A` is requested, `C` is fetched **in parallel**:
 
 ```
 Entry ---> (A + C)
 ```
 
-It is possible for `C` to have further imports, which will result in even more roundtrips in the un-optimized scenario. Vite's optimization will trace all the direct imports to completely eliminate the roundtrips regardless of import depth.
+It is possible for `C` to have further imports, which will result in even more roundtrips in the un-optimized scenario. grug's optimization will trace all the direct imports to completely eliminate the roundtrips regardless of import depth.

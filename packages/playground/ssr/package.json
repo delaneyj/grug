@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "node server",
     "build": "yarn build:client && yarn build:server",
-    "build:client": "vite build --ssrManifest --outDir dist/client",
-    "build:server": "vite build --ssr src/entry-server.ts --outDir dist/server",
+    "build:client": "grug build --ssrManifest --outDir dist/client",
+    "build:server": "grug build --ssr src/entry-server.ts --outDir dist/server",
     "serve": "NODE_ENV=production node server",
     "debug": "node --inspect-brk server"
   },
@@ -18,8 +18,8 @@
   "devDependencies": {
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "@vitejs/plugin-react-refresh": "^1.1.2",
-    "@vitejs/plugin-vue": "^1.0.0",
+    "@delaneyj/plugin-react-refresh": "^1.1.2",
+    "@delaneyj/plugin-vue": "^1.0.0",
     "@vue/compiler-sfc": "^3.0.5",
     "@vue/server-renderer": "^3.0.5",
     "compression": "^1.7.4",

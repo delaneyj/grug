@@ -7,7 +7,7 @@ if (!__dirname.includes('node_modules')) {
   } catch (e) {}
 }
 
-global.__vite_start_time = Date.now()
+global.__grug_start_time = Date.now()
 
 // check debug mode first before requiring the CLI.
 const debugIndex = process.argv.indexOf('--debug')
@@ -17,12 +17,12 @@ const profileIndex = process.argv.indexOf('--profile')
 if (debugIndex > 0) {
   let value = process.argv[debugIndex + 1]
   if (!value || value.startsWith('-')) {
-    value = 'vite:*'
+    value = 'grug:*'
   } else {
     // support debugging multiple flags with comma-separated list
     value = value
       .split(',')
-      .map((v) => `vite:${v}`)
+      .map((v) => `grug:${v}`)
       .join(',')
   }
   process.env.DEBUG = value
@@ -30,7 +30,7 @@ if (debugIndex > 0) {
   if (filterIndex > 0) {
     const filter = process.argv[filterIndex + 1]
     if (filter && !filter.startsWith('-')) {
-      process.env.VITE_DEBUG_FILTER = filter
+      process.env.grug_DEBUG_FILTER = filter
     }
   }
 }
@@ -46,7 +46,7 @@ if (profileIndex > 0) {
     process.argv.splice(profileIndex, 1)
   }
   const inspector = require('inspector')
-  const session = (global.__vite_profile_session = new inspector.Session())
+  const session = (global.__grug_profile_session = new inspector.Session())
   session.connect()
   session.post('Profiler.enable', () => {
     session.post('Profiler.start', start)

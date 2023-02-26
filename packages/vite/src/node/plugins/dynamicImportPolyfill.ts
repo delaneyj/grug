@@ -3,7 +3,7 @@ import { Plugin } from '../plugin'
 import { isModernFlag } from './importAnaysisBuild'
 import path from 'path'
 
-export const polyfillId = 'vite/dynamic-import-polyfill'
+export const polyfillId = 'grug/dynamic-import-polyfill'
 
 export function dynamicImportPolyfillPlugin(config: ResolvedConfig): Plugin {
   const skip = config.command === 'serve' || config.build.ssr
@@ -15,7 +15,7 @@ export function dynamicImportPolyfillPlugin(config: ResolvedConfig): Plugin {
     )});`
 
   return {
-    name: 'vite:dynamic-import-polyfill',
+    name: 'grug:dynamic-import-polyfill',
     resolveId(id) {
       if (id === polyfillId) {
         return id
@@ -39,7 +39,7 @@ export function dynamicImportPolyfillPlugin(config: ResolvedConfig): Plugin {
       }
       if (!polyfillLoaded) {
         throw new Error(
-          `Vite's dynamic import polyfill is enabled but was never imported. This ` +
+          `grug's dynamic import polyfill is enabled but was never imported. This ` +
             `should only happen when using custom non-html rollup inputs. Make ` +
             `sure to add \`import "${polyfillId}"\` as the first statement in ` +
             `your custom entry.`

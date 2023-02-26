@@ -31,7 +31,7 @@ import {
   VALID_ID_PREFIX,
   NULL_BYTE_PLACEHOLDER
 } from '../constants'
-import { ViteDevServer } from '..'
+import { grugDevServer } from '..'
 import { checkPublicFile } from './asset'
 import { parse as parseJS } from 'acorn'
 import type { Node } from 'estree'
@@ -40,7 +40,7 @@ import { transformImportGlob } from './importAnaysisBuild'
 import isBuiltin from 'isbuiltin'
 
 const isDebug = !!process.env.DEBUG
-const debugRewrite = createDebugger('vite:rewrite')
+const debugRewrite = createDebugger('grug:rewrite')
 
 const clientDir = normalizePath(CLIENT_DIR)
 
@@ -84,10 +84,10 @@ function markExplicitImport(url: string) {
  *     ```
  */
 export function importAnalysisPlugin(config: ResolvedConfig): Plugin {
-  let server: ViteDevServer
+  let server: grugDevServer
 
   return {
-    name: 'vite:import-analysis',
+    name: 'grug:import-analysis',
 
     configureServer(_server) {
       server = _server
@@ -111,7 +111,7 @@ export function importAnalysisPlugin(config: ResolvedConfig): Plugin {
         const maybeJSX = !isVue && isJSRequest(importer)
 
         const msg = isVue
-          ? `Install @vitejs/plugin-vue to handle .vue files.`
+          ? `Install @delaneyj/plugin-vue to handle .vue files.`
           : maybeJSX
           ? `If you are using JSX, make sure to name the file with the .jsx or .tsx extension.`
           : `You may need to install appropriate plugins to handle the ${path.extname(
@@ -142,7 +142,7 @@ export function importAnalysisPlugin(config: ResolvedConfig): Plugin {
       let needQueryInjectHelper = false
       let s: MagicString | undefined
       const str = () => s || (s = new MagicString(source))
-      // vite-only server context
+      // grug-only server context
       const { moduleGraph } = server
       // since we are already in the transform phase of the importer, it must
       // have been loaded so its entry is guaranteed in the module graph.
@@ -274,11 +274,11 @@ export function importAnalysisPlugin(config: ResolvedConfig): Plugin {
         }
 
         // For dynamic id, check if it's a literal that we can resolve
-        let hasViteIgnore = false
+        let hasgrugIgnore = false
         let isLiteralDynamicId = false
         if (dynamicIndex >= 0) {
-          // check @vite-ignore which suppresses dynamic import warning
-          hasViteIgnore = /\/\*\s*@vite-ignore\s*\*\//.test(url)
+          // check @grug-ignore which suppresses dynamic import warning
+          hasgrugIgnore = /\/\*\s*@grug-ignore\s*\*\//.test(url)
           // #998 remove comment
           url = url.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '').trim()
           const literalIdMatch = url.match(/^'([^']+)'|"([^"]+)"$/)
@@ -362,23 +362,23 @@ export function importAnalysisPlugin(config: ResolvedConfig): Plugin {
           // record for HMR import chain analysis
           importedUrls.add(url)
         } else if (!importer.startsWith(clientDir)) {
-          if (!hasViteIgnore && !isSupportedDynamicImport(url)) {
+          if (!hasgrugIgnore && !isSupportedDynamicImport(url)) {
             this.warn(
               `\n` +
                 chalk.cyan(importerModule.file) +
                 `\n` +
                 generateCodeFrame(source, start) +
-                `\nThe above dynamic import cannot be analyzed by vite.\n` +
+                `\nThe above dynamic import cannot be analyzed by grug.\n` +
                 `See ${chalk.blue(
                   `https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations`
                 )} ` +
                 `for supported dynamic import formats. ` +
                 `If this is intended to be left as-is, you can use the ` +
-                `/* @vite-ignore */ comment inside the import() call to suppress this warning.\n`
+                `/* @grug-ignore */ comment inside the import() call to suppress this warning.\n`
             )
           }
           needQueryInjectHelper = true
-          str().overwrite(start, end, `__vite__injectQuery(${url}, 'import')`)
+          str().overwrite(start, end, `__grug__injectQuery(${url}, 'import')`)
         }
       }
 
@@ -404,8 +404,8 @@ export function importAnalysisPlugin(config: ResolvedConfig): Plugin {
         )
         // inject hot context
         str().prepend(
-          `import { createHotContext as __vite__createHotContext } from "${CLIENT_PUBLIC_PATH}";` +
-            `import.meta.hot = __vite__createHotContext(${JSON.stringify(
+          `import { createHotContext as __grug__createHotContext } from "${CLIENT_PUBLIC_PATH}";` +
+            `import.meta.hot = __grug__createHotContext(${JSON.stringify(
               importerModule.url
             )});`
         )
@@ -413,7 +413,7 @@ export function importAnalysisPlugin(config: ResolvedConfig): Plugin {
 
       if (needQueryInjectHelper) {
         str().prepend(
-          `import { injectQuery as __vite__injectQuery } from "${CLIENT_PUBLIC_PATH}";`
+          `import { injectQuery as __grug__injectQuery } from "${CLIENT_PUBLIC_PATH}";`
         )
       }
 
@@ -477,7 +477,7 @@ function isOptimizedCjs(
   {
     _optimizeDepsMetadata: optimizeDepsMetadata,
     config: { optimizeCacheDir }
-  }: ViteDevServer
+  }: grugDevServer
 ): boolean {
   if (optimizeDepsMetadata && optimizeCacheDir) {
     const relative = path.relative(optimizeCacheDir, cleanUrl(id))
@@ -535,7 +535,7 @@ function transformCjsImport(
     // If there is multiple import for same id in one file,
     // importIndex will prevent the cjsModuleName to be duplicate
     const cjsModuleName = makeLegalIdentifier(
-      `__vite__cjsImport${importIndex}_${rawUrl}`
+      `__grug__cjsImport${importIndex}_${rawUrl}`
     )
     const lines: string[] = [`import ${cjsModuleName} from "${url}";`]
     importNames.forEach(({ importedName, localName }) => {

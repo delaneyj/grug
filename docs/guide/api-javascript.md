@@ -1,19 +1,19 @@
 # JavaScript API
 
-Vite's JavaScript APIs are fully typed, and it's recommended to use TypeScript or enable JS type checking in VSCode to leverage the intellisense and validation.
+grug's JavaScript APIs are fully typed, and it's recommended to use TypeScript or enable JS type checking in VSCode to leverage the intellisense and validation.
 
 ## `createServer`
 
 **Type Signature**
 
 ```ts
-async function createServer(inlineConfig?: InlineConfig): Promise<ViteDevServer>
+async function createServer(inlineConfig?: InlineConfig): Promise<grugDevServer>
 ```
 
 **Example Usage**
 
 ```js
-const { createServer } = require('vite')
+const { createServer } = require('grug')
 
 ;(async () => {
   const server = await createServer({
@@ -28,29 +28,29 @@ const { createServer } = require('vite')
 })()
 ```
 
-### Using the Vite Server as a Middleware
+### Using the grug Server as a Middleware
 
-Vite can be used as a middleware in an existing raw Node.js http server or frameworks that are comaptible with the `(req, res, next) => {}` style middlewares. For example with `express`:
+grug can be used as a middleware in an existing raw Node.js http server or frameworks that are comaptible with the `(req, res, next) => {}` style middlewares. For example with `express`:
 
 ```js
-const vite = require('vite')
+const grug = require('grug')
 const express = require('express')
 
 ;(async () => {
   const app = express()
 
-  // create vite dev server in middleware mode
-  // so vite creates the hmr websocket server on its own.
+  // create grug dev server in middleware mode
+  // so grug creates the hmr websocket server on its own.
   // the ws server will be listening at port 24678 by default, and can be
   // configured via server.hmr.port
-  const viteServer = await vite.createServer({
+  const grugServer = await grug.createServer({
     server: {
       middlewareMode: true
     }
   })
 
-  // use vite's connect instance as middleware
-  app.use(viteServer.app)
+  // use grug's connect instance as middleware
+  app.use(grugServer.app)
 
   app.use('*', (req, res) => {
     // serve custom index.html
@@ -60,10 +60,10 @@ const express = require('express')
 })()
 ```
 
-Note that in middleware mode, Vite will not be serving `index.html` - that is now the responsibility of the parent server. When serving the HTML, make sure to include a link to Vite's dev client:
+Note that in middleware mode, grug will not be serving `index.html` - that is now the responsibility of the parent server. When serving the HTML, make sure to include a link to grug's dev client:
 
 ```html
-<script type="module" src="/@vite/client"></script>
+<script type="module" src="/@grug/client"></script>
 ```
 
 ## `InlineConfig`
@@ -71,14 +71,14 @@ Note that in middleware mode, Vite will not be serving `index.html` - that is no
 The `InlineConfig` interface extends `UserConfig` with additional properties:
 
 - `mode`: override default mode (`'development'` for server)
-- `configFile`: specify config file to use. If not set, Vite will try to automatically resolve one from project root. Set to `false` to disable auto resolving.
+- `configFile`: specify config file to use. If not set, grug will try to automatically resolve one from project root. Set to `false` to disable auto resolving.
 
-## `ViteDevServer`
+## `grugDevServer`
 
 ```ts
-interface ViteDevServer {
+interface grugDevServer {
   /**
-   * The resolved vite config object
+   * The resolved grug config object
    */
   config: ResolvedConfig
   /**
@@ -127,7 +127,7 @@ interface ViteDevServer {
   /**
    * Start the server.
    */
-  listen(port?: number): Promise<ViteDevServer>
+  listen(port?: number): Promise<grugDevServer>
   /**
    * Stop the server.
    */
@@ -149,7 +149,7 @@ async function build(
 
 ```js
 const path = require('path')
-const { build } = require('vite')
+const { build } = require('grug')
 
 ;(async () => {
   await build({

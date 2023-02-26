@@ -1,4 +1,4 @@
-import { ViteDevServer } from '..'
+import { grugDevServer } from '..'
 import { Plugin } from '../plugin'
 import { bareImportRE } from '../utils'
 import { tryOptimizedResolve } from './resolve'
@@ -7,9 +7,9 @@ import { tryOptimizedResolve } from './resolve'
  * A plugin to avoid an aliased AND optimized dep from being aliased in src
  */
 export function preAliasPlugin(): Plugin {
-  let server: ViteDevServer
+  let server: grugDevServer
   return {
-    name: 'vite:pre-alias',
+    name: 'grug:pre-alias',
     configureServer(_server) {
       server = _server
     },

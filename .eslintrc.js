@@ -25,7 +25,7 @@ module.exports = {
     ],
     'node/no-restricted-require': [
       'error',
-      Object.keys(require('./packages/vite/package.json').devDependencies).map(
+      Object.keys(require('./packages/grug/package.json').devDependencies).map(
         (d) => ({
           name: d,
           message:
@@ -38,13 +38,13 @@ module.exports = {
     'node/no-extraneous-import': [
       'error',
       {
-        allowModules: ['vite']
+        allowModules: ['grug']
       }
     ],
     'node/no-extraneous-require': [
       'error',
       {
-        allowModules: ['vite']
+        allowModules: ['grug']
       }
     ],
     'node/no-deprecated-api': 'off',
@@ -55,7 +55,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['packages/vite/src/node/**'],
+      files: ['packages/grug/src/node/**'],
       rules: {
         'no-console': ['error']
       }

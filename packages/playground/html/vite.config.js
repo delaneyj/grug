@@ -1,7 +1,7 @@
 const { resolve } = require('path')
 
 /**
- * @type {import('vite').UserConfig}
+ * @type {import('grug').UserConfig}
  */
 module.exports = {
   build: {
@@ -19,7 +19,7 @@ module.exports = {
       transformIndexHtml: {
         enforce: 'pre',
         transform(html) {
-          if (html.includes('/@vite/client')) {
+          if (html.includes('/@grug/client')) {
             throw new Error('pre transform applied at wrong time!')
           }
           return `
@@ -50,7 +50,7 @@ module.exports = {
         return [
           {
             tag: 'meta',
-            attrs: { name: 'description', content: 'a vite app' }
+            attrs: { name: 'description', content: 'a grug app' }
             // default injection is head-prepend
           },
           {

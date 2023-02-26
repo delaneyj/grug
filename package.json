@@ -1,5 +1,5 @@
 {
-  "name": "vite-monorepo",
+  "name": "grug-monorepo",
   "private": true,
   "workspaces": [
     "packages/*",
@@ -9,15 +9,15 @@
     "lint": "eslint --ext .js,.ts packages/*/src/**",
     "test": "run-s test-serve test-build",
     "test-serve": "jest",
-    "debug-serve": "cross-env VITE_DEBUG_SERVE=1 node --inspect-brk ./node_modules/.bin/jest",
-    "test-build": "cross-env VITE_TEST_BUILD=1 jest",
-    "debug-build": "cross-env VITE_TEST_BUILD=1 VITE_PRESERVE_BUILD_ARTIFACTS=1 node --inspect-brk ./node_modules/.bin/jest",
-    "docs": "vitepress dev docs",
-    "build-docs": "vitepress build docs",
-    "serve-docs": "vitepress serve docs",
-    "build-vite": "cd packages/vite && yarn build",
+    "debug-serve": "cross-env grug_DEBUG_SERVE=1 node --inspect-brk ./node_modules/.bin/jest",
+    "test-build": "cross-env grug_TEST_BUILD=1 jest",
+    "debug-build": "cross-env grug_TEST_BUILD=1 grug_PRESERVE_BUILD_ARTIFACTS=1 node --inspect-brk ./node_modules/.bin/jest",
+    "docs": "grugpress dev docs",
+    "build-docs": "grugpress build docs",
+    "serve-docs": "grugpress serve docs",
+    "build-grug": "cd packages/grug && yarn build",
     "build-plugin-vue": "cd packages/plugin-vue && yarn build",
-    "ci-docs": "run-s build-vite build-plugin-vue build-docs"
+    "ci-docs": "run-s build-grug build-plugin-vue build-docs"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.12.1",
@@ -46,7 +46,7 @@
     "slash": "^3.0.0",
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.2",
-    "vitepress": "^0.11.4",
+    "grugpress": "^0.11.4",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {

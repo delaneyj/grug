@@ -77,7 +77,7 @@ export interface ServerOptions {
    * Uses [`http-proxy`](https://github.com/http-party/node-http-proxy).
    * Full options [here](https://github.com/http-party/node-http-proxy#options).
    *
-   * Example `vite.config.js`:
+   * Example `grug.config.js`:
    * ``` js
    * module.exports = {
    *   proxy: {
@@ -102,11 +102,11 @@ export interface ServerOptions {
    */
   cors?: CorsOptions | boolean
   /**
-   * If enabled, vite will exit if specified port is already in use
+   * If enabled, grug will exit if specified port is already in use
    */
   strictPort?: boolean
   /**
-   * Create Vite dev server to be used as a middleware in an existing server
+   * Create grug dev server to be used as a middleware in an existing server
    */
   middlewareMode?: boolean
 }
@@ -130,12 +130,12 @@ export interface CorsOptions {
 export type CorsOrigin = boolean | string | RegExp | (string | RegExp)[]
 
 export type ServerHook = (
-  server: ViteDevServer
+  server: grugDevServer
 ) => (() => void) | void | Promise<(() => void) | void>
 
-export interface ViteDevServer {
+export interface grugDevServer {
   /**
-   * The resolved vite config object
+   * The resolved grug config object
    */
   config: ResolvedConfig
   /**
@@ -208,7 +208,7 @@ export interface ViteDevServer {
   /**
    * Start the server.
    */
-  listen(port?: number): Promise<ViteDevServer>
+  listen(port?: number): Promise<grugDevServer>
   /**
    * Stop the server.
    */
@@ -226,7 +226,7 @@ export interface ViteDevServer {
 
 export async function createServer(
   inlineConfig: InlineConfig = {}
-): Promise<ViteDevServer> {
+): Promise<grugDevServer> {
   const config = await resolveConfig(inlineConfig, 'serve', 'development')
   const root = config.root
   const serverConfig = config.server || {}
@@ -255,12 +255,12 @@ export async function createServer(
   const moduleGraph = new ModuleGraph(container)
   const closeHttpServer = createSeverCloseFn(httpServer)
 
-  const server: ViteDevServer = {
+  const server: grugDevServer = {
     config: config,
     middlewares,
     get app() {
       config.logger.warn(
-        `ViteDevServer.app is deprecated. Use ViteDevServer.middlewares instead.`
+        `grugDevServer.app is deprecated. Use grugDevServer.middlewares instead.`
       )
       return middlewares
     },
@@ -368,7 +368,7 @@ export async function createServer(
   // spa fallback
   middlewares.use(
     history({
-      logger: createDebugger('vite:spa-fallback'),
+      logger: createDebugger('grug:spa-fallback'),
       // support /dir/ without explicit index.html
       rewrites: [
         {
@@ -464,9 +464,9 @@ async function resolveHttpServer(
 }
 
 async function startServer(
-  server: ViteDevServer,
+  server: grugDevServer,
   inlinePort?: number
-): Promise<ViteDevServer> {
+): Promise<grugDevServer> {
   const httpServer = server.httpServer
   if (!httpServer) {
     throw new Error('Cannot call server.listen in middleware mode.')
@@ -499,7 +499,7 @@ async function startServer(
     httpServer.listen(port, () => {
       httpServer.removeListener('error', onError)
 
-      info(`\n  Vite dev server running at:\n`, { clear: true })
+      info(`\n  grug dev server running at:\n`, { clear: true })
       const interfaces = os.networkInterfaces()
       Object.keys(interfaces).forEach((key) =>
         (interfaces[key] || [])
@@ -519,22 +519,22 @@ async function startServer(
       )
 
       // @ts-ignore
-      if (global.__vite_start_time) {
+      if (global.__grug_start_time) {
         info(
           chalk.cyan(
             // @ts-ignore
-            `\n  ready in ${Date.now() - global.__vite_start_time}ms.\n`
+            `\n  ready in ${Date.now() - global.__grug_start_time}ms.\n`
           )
         )
       }
 
       // @ts-ignore
-      const profileSession = global.__vite_profile_session
+      const profileSession = global.__grug_profile_session
       if (profileSession) {
         profileSession.post('Profiler.stop', (err: any, { profile }: any) => {
           // Write profile to disk, upload, etc.
           if (!err) {
-            const outPath = path.resolve('./vite-profile.cpuprofile')
+            const outPath = path.resolve('./grug-profile.cpuprofile')
             fs.writeFileSync(outPath, JSON.stringify(profile))
             info(
               chalk.yellow(

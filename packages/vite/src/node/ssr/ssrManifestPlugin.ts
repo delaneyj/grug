@@ -8,7 +8,7 @@ export function ssrManifestPlugin(config: ResolvedConfig): Plugin {
   const base = config.build.base
 
   return {
-    name: 'vite:manifest',
+    name: 'grug:manifest',
     generateBundle(_options, bundle) {
       for (const file in bundle) {
         const chunk = bundle[file]

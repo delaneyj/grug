@@ -6,5 +6,5 @@ declare global {
 
   // injected in scripts/jestPerTestSetup.ts
   const browserLogs: string[]
-  const viteTestUrl: string
+  const grugTestUrl: string
 }

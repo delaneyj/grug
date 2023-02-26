@@ -105,7 +105,7 @@ code {
   <div class="tip">
     Click outside or fix the code to dismiss.<br>
     You can also disable this overlay with
-    <code>hmr: { overlay: false }</code> in <code>vite.config.js.</code>
+    <code>hmr: { overlay: false }</code> in <code>grug.config.js.</code>
   </div>
 </div>
 `
@@ -181,5 +181,5 @@ export class ErrorOverlay extends HTMLElement {
   }
 }
 
-export const overlayId = 'vite-error-overlay'
+export const overlayId = 'grug-error-overlay'
 customElements.define(overlayId, ErrorOverlay)

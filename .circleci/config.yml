@@ -30,7 +30,7 @@ jobs:
       - *restore_cache
       - *install_deps
       - *save_cache
-      - run: cd packages/vite && yarn build
+      - run: cd packages/grug && yarn build
       - run: cd packages/plugin-vue && yarn build
       - run: yarn test-serve --runInBand
       - run: yarn test-build --runInBand

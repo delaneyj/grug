@@ -14,7 +14,7 @@ export function manifestPlugin(config: ResolvedConfig): Plugin {
   let outputCount = 0
 
   return {
-    name: 'vite:manifest',
+    name: 'grug:manifest',
     generateBundle({ format }, bundle) {
       for (const file in bundle) {
         const chunk = bundle[file]

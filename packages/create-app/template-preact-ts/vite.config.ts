@@ -1,5 +1,5 @@
-import preactRefresh from '@prefresh/vite'
-import { defineConfig } from 'vite'
+import preactRefresh from '@prefresh/grug'
+import { defineConfig } from 'grug'
 
 export default defineConfig({
   esbuild: {

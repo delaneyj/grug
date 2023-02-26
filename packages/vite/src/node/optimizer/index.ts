@@ -29,11 +29,11 @@ import { createFilter } from '@rollup/pluginutils'
 import { Plugin } from '../plugin'
 import { prompt } from 'enquirer'
 
-const debug = createDebugger('vite:optimize')
+const debug = createDebugger('grug:optimize')
 
 const KNOWN_IGNORE_LIST = new Set([
-  'vite',
-  'vitepress',
+  'grug',
+  'grugpress',
   'tailwindcss',
   '@tailwindcss/ui'
 ])
@@ -49,7 +49,7 @@ const KNOWN_WARN_LIST = new Set([
   'typescript'
 ])
 
-const WARN_RE = /^(@vitejs\/|vite-)plugin-/
+const WARN_RE = /^(@delaneyj\/|grug-)plugin-/
 
 export interface DepOptimizationOptions {
   /**
@@ -65,13 +65,13 @@ export interface DepOptimizationOptions {
    */
   plugins?: Plugin[]
   /**
-   * Automatically run `vite optimize` on server start?
+   * Automatically run `grug optimize` on server start?
    * @default true
    */
   auto?: boolean
   /**
    * A list of linked dependencies that should be treated as source code.
-   * @deprecated local linked deps are auto detected in Vite 2.
+   * @deprecated local linked deps are auto detected in grug 2.
    */
   link?: string[]
 }
@@ -190,7 +190,7 @@ export async function optimizeDeps(
           `be used in the browser, e.g. ${chalk.cyan(
             invalidIds.join(', ')
           )}. ` +
-          `\nSince vite pre-bundles eligible dependencies to improve performance,\n` +
+          `\nSince grug pre-bundles eligible dependencies to improve performance,\n` +
           `they should probably be moved to devDependencies instead.\n` +
           `Auto-update package.json and continue without these deps?`
       )
@@ -401,7 +401,7 @@ async function resolveQualifiedDeps(
       deps
         .filter((id) => !qualified[id])
         // make sure aliased deps are external
-        // https://github.com/vitejs/vite-plugin-react/issues/4
+        // https://github.com/delaneyj/grug-plugin-react/issues/4
         .map(async (id) => (await aliasResolver.resolveId(id))?.id || id)
     ))
   )

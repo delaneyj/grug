@@ -125,12 +125,12 @@ export async function createPluginContainer(
   const isDebug = process.env.DEBUG
 
   const seenResolves: Record<string, true | undefined> = {}
-  const debugResolve = createDebugger('vite:resolve')
-  const debugPluginResolve = createDebugger('vite:plugin-resolve', {
-    onlyWhenFocused: 'vite:plugin'
+  const debugResolve = createDebugger('grug:resolve')
+  const debugPluginResolve = createDebugger('grug:plugin-resolve', {
+    onlyWhenFocused: 'grug:plugin'
   })
-  const debugPluginTransform = createDebugger('vite:plugin-transform', {
-    onlyWhenFocused: 'vite:plugin'
+  const debugPluginTransform = createDebugger('grug:plugin-transform', {
+    onlyWhenFocused: 'grug:plugin'
   })
 
   // ---------------------------------------------------------------------------

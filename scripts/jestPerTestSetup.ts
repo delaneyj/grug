@@ -3,15 +3,15 @@ import * as http from 'http'
 import { resolve } from 'path'
 import slash from 'slash'
 import sirv from 'sirv'
-import { createServer, build, ViteDevServer, UserConfig } from 'vite'
+import { createServer, build, grugDevServer, UserConfig } from 'grug'
 import { Page } from 'playwright-chromium'
 
-const isBuildTest = !!process.env.VITE_TEST_BUILD
+const isBuildTest = !!process.env.grug_TEST_BUILD
 
 // injected by the test env
 declare const page: Page
 
-let server: ViteDevServer | http.Server
+let server: grugDevServer | http.Server
 let tempDir: string
 let err: Error
 
@@ -28,7 +28,7 @@ beforeAll(async () => {
     const testName = slash(testPath).match(/playground\/([\w-]+)\//)?.[1]
 
     // if this is a test placed under playground/xxx/__tests__
-    // start a vite server in that directory.
+    // start a grug server in that directory.
     if (testName) {
       const playgroundRoot = resolve(__dirname, '../packages/playground')
       const srcDir = resolve(playgroundRoot, testName)
@@ -64,15 +64,15 @@ beforeAll(async () => {
       }
 
       if (!isBuildTest) {
-        process.env.VITE_INLINE = 'inline-serve'
+        process.env.grug_INLINE = 'inline-serve'
         server = await (await createServer(options)).listen()
         // use resolved port from server
-        const url = ((global as any).viteTestUrl = `http://localhost:${server.config.server.port}`)
+        const url = ((global as any).grugTestUrl = `http://localhost:${server.config.server.port}`)
         await page.goto(url)
       } else {
-        process.env.VITE_INLINE = 'inline-build'
+        process.env.grug_INLINE = 'inline-build'
         await build(options)
-        const url = ((global as any).viteTestUrl = await startStaticServer())
+        const url = ((global as any).grugTestUrl = await startStaticServer())
         await page.goto(url)
       }
     }
@@ -95,7 +95,7 @@ afterAll(async () => {
 
 function startStaticServer(): Promise<string> {
   // check if the test project has base config
-  const configFile = resolve(tempDir, 'vite.config.js')
+  const configFile = resolve(tempDir, 'grug.config.js')
   let config: UserConfig
   try {
     config = require(configFile)

@@ -2,7 +2,7 @@ import { ResolvedConfig } from '../config'
 import { Plugin } from '../plugin'
 import { fileToUrl } from './asset'
 
-const wasmHelperId = '/__vite-wasm-helper'
+const wasmHelperId = '/__grug-wasm-helper'
 
 const wasmHelper = async (opts = {}, url: string) => {
   let result
@@ -44,7 +44,7 @@ const wasmHelperCode = wasmHelper.toString()
 
 export const wasmPlugin = (config: ResolvedConfig): Plugin => {
   return {
-    name: 'vite:wasm',
+    name: 'grug:wasm',
 
     resolveId(id) {
       if (id === wasmHelperId) {

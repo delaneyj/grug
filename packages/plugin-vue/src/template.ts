@@ -103,7 +103,7 @@ export function resolveTemplateCompilerOptions(
   let transformAssetUrls = options.template?.transformAssetUrls
   let assetUrlOptions
   if (options.devServer) {
-    // during dev, inject vite base so that @vue/compiler-sfc can transform
+    // during dev, inject grug base so that @vue/compiler-sfc can transform
     // relative paths directly to absolute paths without incurring an extra import
     // request
     if (filename.startsWith(options.root)) {

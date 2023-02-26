@@ -5,7 +5,7 @@ const moduleIdRE = /node_modules\/([^@.][^/]*|@[^/]+\/[^/]+)\//
 
 export function recordCjsEntryPlugin(data: DepOptimizationMetadata): Plugin {
   return {
-    name: 'vite:cjs-entry-named-export',
+    name: 'grug:cjs-entry-named-export',
     async generateBundle(_, bundle) {
       Object.values(bundle).forEach((chunk) => {
         if (chunk.type === 'chunk') {

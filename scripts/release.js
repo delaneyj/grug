@@ -17,7 +17,7 @@ const pkgPath = path.resolve(pkgDir, 'package.json')
  * @type {{ name: string, version: string }}
  */
 const pkg = require(pkgPath)
-const pkgName = pkg.name.replace(/^@vitejs\//, '')
+const pkgName = pkg.name.replace(/^@delaneyj\//, '')
 const currentVersion = pkg.version
 /**
  * @type {boolean}
@@ -107,7 +107,7 @@ async function main() {
   }
 
   const tag =
-    pkgName === 'vite' ? `v${targetVersion}` : `${pkgName}@${targetVersion}`
+    pkgName === 'grug' ? `v${targetVersion}` : `${pkgName}@${targetVersion}`
 
   /**
    * @type {{ yes: boolean }}

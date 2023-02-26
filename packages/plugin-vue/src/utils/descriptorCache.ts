@@ -41,7 +41,7 @@ export function getDescriptor(filename: string, errorOnMissing = true) {
   if (errorOnMissing) {
     throw new Error(
       `${filename} has no corresponding SFC entry in the cache. ` +
-        `This is a @vitejs/plugin-vue internal error, please open an issue.`
+        `This is a @delaneyj/plugin-vue internal error, please open an issue.`
     )
   }
 }

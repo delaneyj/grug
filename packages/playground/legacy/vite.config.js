@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const legacy = require('@vitejs/plugin-legacy').default
+const legacy = require('@delaneyj/plugin-legacy').default
 
 module.exports = {
   plugins: [

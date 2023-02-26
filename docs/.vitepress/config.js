@@ -1,10 +1,10 @@
 // @ts-check
 
 /**
- * @type {import('vitepress').UserConfig}
+ * @type {import('grugpress').UserConfig}
  */
 module.exports = {
-  title: 'Vite⚡',
+  title: 'grug⚡',
   description: 'Next Generation Frontend Tooling',
   head: [
     [
@@ -14,7 +14,7 @@ module.exports = {
     ]
   ],
   themeConfig: {
-    repo: 'vitejs/vite',
+    repo: 'delaneyj/grug',
     docsDir: 'docs',
     docsBranch: 'main',
     editLinks: true,
@@ -27,7 +27,7 @@ module.exports = {
       {
         text: 'Changelog',
         link:
-          'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md'
+          'https://github.com/delaneyj/grug/blob/main/packages/grug/CHANGELOG.md'
       }
     ],
 

@@ -25,8 +25,8 @@ export function resolveFrom(id: string, basedir: string) {
   })
 }
 
-// set in bin/vite.js
-const filter = process.env.VITE_DEBUG_FILTER
+// set in bin/grug.js
+const filter = process.env.grug_DEBUG_FILTER
 
 const DEBUG = process.env.DEBUG
 

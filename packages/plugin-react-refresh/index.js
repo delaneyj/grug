@@ -26,13 +26,13 @@ import RefreshRuntime from "${runtimePublicPath}"
 RefreshRuntime.injectIntoGlobalHook(window)
 window.$RefreshReg$ = () => {}
 window.$RefreshSig$ = () => (type) => type
-window.__vite_plugin_react_preamble_installed__ = true
+window.__grug_plugin_react_preamble_installed__ = true
 `
 
 /**
  * Transform plugin for transforming and injecting per-file refresh code.
  *
- * @returns {import('vite').Plugin}
+ * @returns {import('grug').Plugin}
  */
 module.exports = function reactRefreshPlugin() {
   let shouldSkip = false
@@ -93,10 +93,10 @@ module.exports = function reactRefreshPlugin() {
   let prevRefreshReg;
   let prevRefreshSig;
 
-  if (!window.__vite_plugin_react_preamble_installed__) {
+  if (!window.__grug_plugin_react_preamble_installed__) {
     throw new Error(
-      "vite-plugin-react can't detect preamble. Something is wrong" +
-      "See https://github.com/vitejs/vite-plugin-react/pull/11#discussion_r430879201"
+      "grug-plugin-react can't detect preamble. Something is wrong" +
+      "See https://github.com/delaneyj/grug-plugin-react/pull/11#discussion_r430879201"
     );
   }
 
@@ -119,9 +119,9 @@ module.exports = function reactRefreshPlugin() {
         ? `import.meta.hot.accept();`
         : ``
     }
-    if (!window.__vite_plugin_react_timeout) {
-      window.__vite_plugin_react_timeout = setTimeout(() => {
-        window.__vite_plugin_react_timeout = 0;
+    if (!window.__grug_plugin_react_timeout) {
+      window.__grug_plugin_react_timeout = setTimeout(() => {
+        window.__grug_plugin_react_timeout = 0;
         RefreshRuntime.performReactRefresh();
       }, 30);
     }

@@ -8,9 +8,9 @@ const path = require('path')
   for (const t of templates) {
     const pkgPath = path.join(__dirname, t, `package.json`)
     const pkg = require(pkgPath)
-    pkg.devDependencies.vite = `^` + require('../vite/package.json').version
+    pkg.devDependencies.grug = `^` + require('../grug/package.json').version
     if (t.startsWith('template-vue')) {
-      pkg.devDependencies['@vitejs/plugin-vue'] =
+      pkg.devDependencies['@delaneyj/plugin-vue'] =
         `^` + require('../plugin-vue/package.json').version
     }
     fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2))

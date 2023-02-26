@@ -49,10 +49,10 @@ export function createLogger(
         if (options.timestamp) {
           const tag =
             type === 'info'
-              ? chalk.cyan.bold(`[vite]`)
+              ? chalk.cyan.bold(`[grug]`)
               : type === 'warn'
-              ? chalk.yellow.bold(`[vite]`)
-              : chalk.red.bold(`[vite]`)
+              ? chalk.yellow.bold(`[grug]`)
+              : chalk.red.bold(`[grug]`)
           return `${chalk.dim(new Date().toLocaleTimeString())} ${tag} ${msg}`
         } else {
           return msg

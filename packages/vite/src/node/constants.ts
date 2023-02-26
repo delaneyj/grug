@@ -2,7 +2,7 @@ import path from 'path'
 
 export const SUPPORTED_EXTS = ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']
 
-export const DEP_CACHE_DIR = `.vite`
+export const DEP_CACHE_DIR = `.grug`
 
 /**
  * Prefix for resolved fs paths, since windows paths may not be valid as URLs.
@@ -20,9 +20,9 @@ export const VALID_ID_PREFIX = `/@id/`
  */
 export const NULL_BYTE_PLACEHOLDER = `__x00__`
 
-export const CLIENT_PUBLIC_PATH = `/@vite/client`
+export const CLIENT_PUBLIC_PATH = `/@grug/client`
 // eslint-disable-next-line
-export const CLIENT_ENTRY = require.resolve('vite/dist/client/client.js')
+export const CLIENT_ENTRY = require.resolve('grug/dist/client/client.js')
 export const CLIENT_DIR = path.dirname(CLIENT_ENTRY)
 
 const knownAssetTypes = [

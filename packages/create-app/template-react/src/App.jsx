@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
+        <p>Hello grug + React!</p>
         <p>
           <button onClick={() => setCount((count) => count + 1)}>
             count is: {count}
@@ -30,11 +30,11 @@ function App() {
           {' | '}
           <a
             className="App-link"
-            href="https://vitejs.dev/guide/features.html"
+            href="https://delaneyj.dev/guide/features.html"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Vite Docs
+            grug Docs
           </a>
         </p>
       </header>

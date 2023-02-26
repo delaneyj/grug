@@ -1,6 +1,6 @@
 # Dependency Pre-Bundling
 
-When you run `vite` for the first time, you may notice this message:
+When you run `grug` for the first time, you may notice this message:
 
 ```
 Optimizable dependencies detected:
@@ -11,18 +11,18 @@ Pre-bundling them to speed up dev server page load...
 
 ## The Why
 
-This is Vite performing what we call "dependency pre-bundling". This process serves two purposes:
+This is grug performing what we call "dependency pre-bundling". This process serves two purposes:
 
-1. **CommonJS and UMD comaptibility:** During development, Vite's dev serves all code as native ESM. Therefore, Vite must convert dependencies that are shipped as CommonJS or UMD into ESM first.
+1. **CommonJS and UMD comaptibility:** During development, grug's dev serves all code as native ESM. Therefore, grug must convert dependencies that are shipped as CommonJS or UMD into ESM first.
 
-   When converting CommonJS dependencies, Vite performs smart import analysis so that named imports to CommonJS modules will work as expected even if the exports are dynamically assigned (e.g. React):
+   When converting CommonJS dependencies, grug performs smart import analysis so that named imports to CommonJS modules will work as expected even if the exports are dynamically assigned (e.g. React):
 
    ```js
    // works as expected
    import React, { useState } from 'react'
    ```
 
-2. **Performance:** Vite converts ESM dependencies with many internal modules into a single module to improve subsequent page load performance.
+2. **Performance:** grug converts ESM dependencies with many internal modules into a single module to improve subsequent page load performance.
 
    Some packages ship their ES modules builds as many separate files importing one another. For example, [`lodash-es` has over 600 internal modules](https://unpkg.com/browse/lodash-es/)! When we do `import { debounce } from 'lodash-es'`, the browser fires off 600+ HTTP requests at the same time! Even though the server has no problem handling them, the large amount of requests create a network congestion on the browser side, causing the page to load noticeably slower.
 
@@ -43,24 +43,24 @@ Pre-bundled dependencies are bundled into a single, separate module, therefore y
 
 ```js
 // Bad, will lead to duplicated module instances.
-// Vite will complain about it.
+// grug will complain about it.
 import debounce from 'lodash-es/debounce'
 
 // Good
 import { debounce } from 'lodash-es'
 ```
 
-Some dependencies may be designed to be used via deep imports, e.g. `firebase` exposes sub modules via `firebase/*` deep imports. For such dependencies, you can instruct Vite to explicitly include these deep import paths via the [`optimizeDeps.include` option](/config/#optimizedeps-include). If you never use the main entry, it is also a good idea to exclude it from pre-bundling.
+Some dependencies may be designed to be used via deep imports, e.g. `firebase` exposes sub modules via `firebase/*` deep imports. For such dependencies, you can instruct grug to explicitly include these deep import paths via the [`optimizeDeps.include` option](/config/#optimizedeps-include). If you never use the main entry, it is also a good idea to exclude it from pre-bundling.
 
 ## Dependency Compatibility
 
-While Vite tries its best to accommodate non-ESM dependencies, there are going to be some dependencies that won't work out of the box. The most common types are those that import Node.js built-in modules (e.g. `os` or `path`) and expect the bundler to automatically shim them. These packages are typically written assuming all users will be consuming it with `webpack`, but such usage does not make sense when targeting browser environments.
+While grug tries its best to accommodate non-ESM dependencies, there are going to be some dependencies that won't work out of the box. The most common types are those that import Node.js built-in modules (e.g. `os` or `path`) and expect the bundler to automatically shim them. These packages are typically written assuming all users will be consuming it with `webpack`, but such usage does not make sense when targeting browser environments.
 
-When using Vite, it is strongly recommended to always prefer dependencies that provide ESM formats. This will make your build faster, and results in smaller production bundles due to more efficient tree-shaking.
+When using grug, it is strongly recommended to always prefer dependencies that provide ESM formats. This will make your build faster, and results in smaller production bundles due to more efficient tree-shaking.
 
 ## Monorepos and Linked Dependencies
 
-In a monorepo setup, a dependency may be a linked package from the same repo. Vite automatically detects dependencies that are not resolved from `node_modules` and treats the linked dep as source code. It will not attempt to bundle the linked dep, and instead will analyze the linked dep's dependency list instead.
+In a monorepo setup, a dependency may be a linked package from the same repo. grug automatically detects dependencies that are not resolved from `node_modules` and treats the linked dep as source code. It will not attempt to bundle the linked dep, and instead will analyze the linked dep's dependency list instead.
 
 ## Customizing the Behavior
 
@@ -68,12 +68,12 @@ The default pre-bundling heuristics may not always be desirable. In cases where 
 
 ## Caching
 
-Vite caches the pre-bundled dependencies in `node_modules/.vite`. It determines whether it needs to re-run the pre-bundling step based on a few sources:
+grug caches the pre-bundled dependencies in `node_modules/.grug`. It determines whether it needs to re-run the pre-bundling step based on a few sources:
 
 - The `dependencies` list in your `package.json`
 - Package manager lockfiles, e.g. `package-lock.json`, `yarn.lock`, or `pnpm-lock.yaml`.
-- Your `vite.config.js`, if present.
+- Your `grug.config.js`, if present.
 
 The pre-bundling step will only need to be re-run when one of the above has changed.
 
-If for some reason you want to force Vite to re-bundle deps, you can either start the dev server with the `--force` command line option, or manually delete the `node_modules/.vite` cache directory.
+If for some reason you want to force grug to re-bundle deps, you can either start the dev server with the `--force` command line option, or manually delete the `node_modules/.grug` cache directory.

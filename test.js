@@ -1,6 +1,6 @@
 const {
   transformForSSR
-} = require('./packages/vite/dist/node/server/ssrTransform')
+} = require('./packages/grug/dist/node/server/ssrTransform')
 
 ;(async () => {
   const { code } = await transformForSSR(`

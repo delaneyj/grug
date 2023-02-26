@@ -49,10 +49,10 @@ Alternatively, you can use the `[{ find: RegExp, replacement: string }]` option 
 
 ## Vue Support
 
-Vite 2.0 core is now framework agnostic. Vue support is now provided via [`@vitejs/plugin-vue`](https://github.com/vitejs/vite/tree/main/packages/plugin-vue). Simply install it and add it in the Vite config:
+grug 2.0 core is now framework agnostic. Vue support is now provided via [`@delaneyj/plugin-vue`](https://github.com/delaneyj/grug/tree/main/packages/plugin-vue). Simply install it and add it in the grug config:
 
 ```js
-import vue from '@vitejs/plugin-vue'
+import vue from '@delaneyj/plugin-vue'
 
 export default {
   plugins: [vue()]
@@ -64,8 +64,8 @@ export default {
 A custom plugin can be used to transform Vue custom blocks like the one below:
 
 ```ts
-// vite.config.js
-import vue from '@vitejs/plugin-vue'
+// grug.config.js
+import vue from '@delaneyj/plugin-vue'
 
 const vueI18nPlugin = {
   name: 'vue-i18n',
@@ -89,7 +89,7 @@ export default {
 
 ## React Support
 
-React Fast Refresh support is now provided via [`@vitejs/plugin-react-refresh`](https://github.com/vitejs/vite/tree/main/packages/plugin-react-refresh).
+React Fast Refresh support is now provided via [`@delaneyj/plugin-react-refresh`](https://github.com/delaneyj/grug/tree/main/packages/plugin-react-refresh).
 
 ## HMR API Change
 
@@ -118,7 +118,7 @@ For entry JS chunks, it also lists its imported chunks which can be used to rend
 
 ## For Plugin Authors
 
-Vite 2 uses a completely redesigned plugin interface which extends Rollup plugins. Please read the new [Plugin Development Guide](./api-plugin).
+grug 2 uses a completely redesigned plugin interface which extends Rollup plugins. Please read the new [Plugin Development Guide](./api-plugin).
 
 Some general pointers on migrating a v1 plugin to v2:
 

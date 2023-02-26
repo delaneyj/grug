@@ -10,7 +10,7 @@ import { idToPkgMap } from '../plugins/resolve'
 export const REQUIRE_SUFFIX = '?commonjs-require'
 
 export const depAssetExternalPlugin = (config: ResolvedConfig): Plugin => ({
-  name: 'vite:dep-assets-external',
+  name: 'grug:dep-assets-external',
   resolveId(id) {
     if (isCSSRequest(id) || config.assetsInclude(id)) {
       return {
@@ -23,7 +23,7 @@ export const depAssetExternalPlugin = (config: ResolvedConfig): Plugin => ({
 
 export const depAssetRewritePlugin = (config: ResolvedConfig): Plugin => {
   return {
-    name: 'vite:dep-assets-rewrite',
+    name: 'grug:dep-assets-rewrite',
     async transform(code, id) {
       if (id.endsWith('.js')) {
         await init

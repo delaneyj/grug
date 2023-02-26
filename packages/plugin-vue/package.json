@@ -1,5 +1,5 @@
 {
-  "name": "@vitejs/plugin-vue",
+  "name": "@delaneyj/plugin-vue",
   "version": "1.1.0",
   "license": "MIT",
   "author": "Evan You",
@@ -21,12 +21,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vitejs/vite.git"
+    "url": "git+https://github.com/delaneyj/grug.git"
   },
   "bugs": {
-    "url": "https://github.com/vitejs/vite/issues"
+    "url": "https://github.com/delaneyj/grug/issues"
   },
-  "homepage": "https://github.com/vitejs/vite/tree/main/packages/plugin-vue#readme",
+  "homepage": "https://github.com/delaneyj/grug/tree/main/packages/plugin-vue#readme",
   "peerDependencies": {
     "@vue/compiler-sfc": "^3.0.4"
   },

@@ -6,7 +6,7 @@ This is the client HMR API. For handling HMR update in plugins, see [handleHotUp
 The manual HMR API is primarily intended for framework and tooling authors. As an end user, HMR is likely already handled for you in the framework specific starter templates.
 :::
 
-Vite exposes its manual HMR API via the special `import.meta.hot` object:
+grug exposes its manual HMR API via the special `import.meta.hot` object:
 
 ```ts
 interface ImportMeta {
@@ -53,7 +53,7 @@ if (import.meta.hot) {
 
 A module that "accepts" hot updates is considered an **HMR boundary**.
 
-Note that Vite's HMR does not actually swap the originally imported module: if an HMR boundary module re-exports imports from a dep, then it is responsible for updating those re-exports (and these exports must be using `let`). In addition, importers up the chain from the boundary module will not be notified of the change.
+Note that grug's HMR does not actually swap the originally imported module: if an HMR boundary module re-exports imports from a dep, then it is responsible for updating those re-exports (and these exports must be using `let`). In addition, importers up the chain from the boundary module will not be notified of the change.
 
 This simplified HMR implementation is sufficient for most dev use cases, while allowing us to skip the expensive work of generating proxy modules.
 

@@ -3,15 +3,15 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "debug": "node --inspect-brk ../../vite/bin/vite"
+    "dev": "grug",
+    "build": "grug build",
+    "debug": "node --inspect-brk ../../grug/bin/grug"
   },
   "dependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-react-refresh": "^1.0.0"
+    "@delaneyj/plugin-react-refresh": "^1.0.0"
   }
 }

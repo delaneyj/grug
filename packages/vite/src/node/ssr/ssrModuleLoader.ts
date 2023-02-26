@@ -1,5 +1,5 @@
 import path from 'path'
-import { ViteDevServer } from '..'
+import { grugDevServer } from '..'
 import { resolveFrom } from '../utils'
 import { ssrRewriteStacktrace } from './ssrStacktrace'
 import {
@@ -17,7 +17,7 @@ interface SSRContext {
 
 export async function ssrLoadModule(
   url: string,
-  server: ViteDevServer,
+  server: grugDevServer,
   isolated: boolean,
   context: SSRContext = { global: isolated ? Object.create(global) : global },
   urlStack: string[] = []

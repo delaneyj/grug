@@ -19,7 +19,7 @@ features:
     details: Rollup-superset plugin interface shared between dev and build.
   - title: 🔑 Fully Typed APIs
     details: Flexible programmatic APIs with full TypeScript typing.
-footer: MIT Licensed | Copyright © 2019-present Evan You & Vite Contributors
+footer: MIT Licensed | Copyright © 2019-present Evan You & grug Contributors
 ---
 
 <div class="frontpage sponsors">
@@ -32,5 +32,5 @@ footer: MIT Licensed | Copyright © 2019-present Evan You & Vite Contributors
 </div>
 
 <script setup>
-import sponsors from './.vitepress/theme/sponsors.json'
+import sponsors from './.grugpress/theme/sponsors.json'
 </script>

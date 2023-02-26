@@ -1,6 +1,6 @@
 import path from 'path'
-import { defineConfig } from 'vite'
-import vuePlugin from '@vitejs/plugin-vue'
+import { defineConfig } from 'grug'
+import vuePlugin from '@delaneyj/plugin-vue'
 import { vueI18nPlugin } from './CustomBlockPlugin'
 
 export default defineConfig({

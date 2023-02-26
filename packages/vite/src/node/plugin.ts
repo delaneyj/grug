@@ -15,9 +15,9 @@ import { ResolvedConfig } from './'
 import { HmrContext } from './server/hmr'
 
 /**
- * Vite plugins extends the Rollup plugin interface with a few extra
- * vite-specific options. A valid vite plugin is also a valid Rollup plugin.
- * On the contrary, a Rollup plugin may or may NOT be a valid vite universal
+ * grug plugins extends the Rollup plugin interface with a few extra
+ * grug-specific options. A valid grug plugin is also a valid Rollup plugin.
+ * On the contrary, a Rollup plugin may or may NOT be a valid grug universal
  * plugin, since some Rollup features do not make sense in an unbundled
  * dev server context. That said, as long as a rollup plugin doesn't have strong
  * coupling between its bundle phase and output phase hooks then it should
@@ -42,11 +42,11 @@ export interface Plugin extends RollupPlugin {
    * Plugin invocation order:
    * - alias resolution
    * - `enforce: 'pre'` plugins
-   * - vite core plugins
+   * - grug core plugins
    * - normal plugins
-   * - vite build plugins
+   * - grug build plugins
    * - `enforce: 'post'` plugins
-   * - vite build post plugins
+   * - grug build post plugins
    */
   enforce?: 'pre' | 'post'
   /**
@@ -54,7 +54,7 @@ export interface Plugin extends RollupPlugin {
    */
   apply?: 'serve' | 'build'
   /**
-   * Modify vite config before it's resolved. The hook can either mutate the
+   * Modify grug config before it's resolved. The hook can either mutate the
    * passed-in config directly, or return a partial config object that will be
    * deeply merged into existing config.
    *
@@ -63,11 +63,11 @@ export interface Plugin extends RollupPlugin {
    */
   config?: (config: UserConfig) => UserConfig | null | void
   /**
-   * Use this hook to read and store the final resolved vite config.
+   * Use this hook to read and store the final resolved grug config.
    */
   configResolved?: (config: ResolvedConfig) => void
   /**
-   * Configure the vite server. The hook receives the {@link ViteDevServer}
+   * Configure the grug server. The hook receives the {@link grugDevServer}
    * instance. This can also be used to store a reference to the server
    * for use in other hooks.
    *
@@ -81,14 +81,14 @@ export interface Plugin extends RollupPlugin {
    * The hook receives the following arguments:
    *
    * - html: string
-   * - ctx?: vite.ServerContext (only present during serve)
+   * - ctx?: grug.ServerContext (only present during serve)
    * - bundle?: rollup.OutputBundle (only present during build)
    *
    * It can either return a transformed string, or a list of html tag
    * descriptors that will be injected into the <head> or <body>.
    *
-   * By default the transform is applied **after** vite's internal html
-   * transform. If you need to apply the transform before vite, use an object:
+   * By default the transform is applied **after** grug's internal html
+   * transform. If you need to apply the transform before grug, use an object:
    * `{ enforce: 'pre', transform: hook }`
    */
   transformIndexHtml?: IndexHtmlTransform

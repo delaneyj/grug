@@ -9,7 +9,7 @@ import {
   resolveHtmlTransforms,
   htmlCommentRE
 } from '../../plugins/html'
-import { ViteDevServer } from '../..'
+import { grugDevServer } from '../..'
 import { send } from '../send'
 import { CLIENT_PUBLIC_PATH, FS_PREFIX } from '../../constants'
 import { cleanUrl } from '../../utils'
@@ -21,7 +21,7 @@ const devHtmlHook: IndexHtmlTransformHook = (html, { path }) => {
   html = html
     .replace(htmlCommentRE, (m) => {
       comments.push(m)
-      return `<!--VITE_COMMENT_${comments.length - 1}-->`
+      return `<!--grug_COMMENT_${comments.length - 1}-->`
     })
     .replace(scriptModuleRE, (_match, _openTag, script) => {
       index++
@@ -31,7 +31,7 @@ const devHtmlHook: IndexHtmlTransformHook = (html, { path }) => {
       }
       return _match
     })
-    .replace(/<!--VITE_COMMENT_(\d+)-->/g, (_, i) => comments[i])
+    .replace(/<!--grug_COMMENT_(\d+)-->/g, (_, i) => comments[i])
 
   return {
     html,
@@ -46,7 +46,7 @@ const devHtmlHook: IndexHtmlTransformHook = (html, { path }) => {
 }
 
 export function indexHtmlMiddleware(
-  server: ViteDevServer,
+  server: grugDevServer,
   plugins: readonly Plugin[]
 ): Connect.NextHandleFunction {
   const [preHooks, postHooks] = resolveHtmlTransforms(plugins)

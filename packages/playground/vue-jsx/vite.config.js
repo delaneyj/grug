@@ -1,7 +1,7 @@
-const vueJsxPlugin = require('@vitejs/plugin-vue-jsx')
+const vueJsxPlugin = require('@delaneyj/plugin-vue-jsx')
 
 /**
- * @type {import('vite').UserConfig}
+ * @type {import('grug').UserConfig}
  */
 module.exports = {
   plugins: [vueJsxPlugin()],

@@ -6,7 +6,7 @@ const hash = require('hash-sum')
 
 /**
  * @param {import('.').Options} options
- * @returns {import('vite').Plugin}
+ * @returns {import('grug').Plugin}
  */
 function vueJsxPlugin(options = {}) {
   let needHmr = false

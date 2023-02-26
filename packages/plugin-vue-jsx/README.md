@@ -1,10 +1,10 @@
-# @vitejs/plugin-vue-jsx [![npm](https://img.shields.io/npm/v/@vitejs/plugin-vue-jsx.svg)](https://npmjs.com/package/@vitejs/plugin-vue-jsx)
+# @delaneyj/plugin-vue-jsx [![npm](https://img.shields.io/npm/v/@delaneyj/plugin-vue-jsx.svg)](https://npmjs.com/package/@delaneyj/plugin-vue-jsx)
 
 Provides Vue 3 JSX & TSX support with HMR.
 
 ```js
-// vite.config.js
-import vueJsx from '@vitejs/plugin-vue-jsx'
+// grug.config.js
+import vueJsx from '@delaneyj/plugin-vue-jsx'
 
 export default {
   plugins: [

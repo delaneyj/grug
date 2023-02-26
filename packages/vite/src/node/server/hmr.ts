@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import { createServer, ViteDevServer } from '..'
+import { createServer, grugDevServer } from '..'
 import { createDebugger, lookupFile, normalizePath } from '../utils'
 import { ModuleNode } from './moduleGraph'
 import chalk from 'chalk'
@@ -9,7 +9,7 @@ import { Update } from 'types/hmrPayload'
 import { CLIENT_DIR } from '../constants'
 import { RollupError } from 'rollup'
 
-export const debugHmr = createDebugger('vite:hmr')
+export const debugHmr = createDebugger('grug:hmr')
 
 const normalizedClientDir = normalizePath(CLIENT_DIR)
 
@@ -27,12 +27,12 @@ export interface HmrContext {
   timestamp: number
   modules: Array<ModuleNode>
   read: () => string | Promise<string>
-  server: ViteDevServer
+  server: grugDevServer
 }
 
 export async function handleHMRUpdate(
   file: string,
-  server: ViteDevServer
+  server: grugDevServer
 ): Promise<any> {
   const { ws, config, moduleGraph } = server
   const shortFile = file.startsWith(config.root + '/')
@@ -217,7 +217,7 @@ function invalidate(mod: ModuleNode, timestamp: number, seen: Set<ModuleNode>) {
 
 export function handlePrunedModules(
   mods: Set<ModuleNode>,
-  { ws }: ViteDevServer
+  { ws }: grugDevServer
 ) {
   // update the disposed modules' hmr timestamp
   // since if it's re-imported, it should re-apply side effects
@@ -361,7 +361,7 @@ function error(pos: number) {
   throw err
 }
 
-// vitejs/vite#610 when hot-reloading Vue files, we read immediately on file
+// delaneyj/grug#610 when hot-reloading Vue files, we read immediately on file
 // change event and sometimes this can be too early and get an empty buffer.
 // Poll until the file's modified time has changed before reading again.
 async function readModifiedFile(file: string): Promise<string> {
@@ -399,9 +399,9 @@ function hasDepsChanged(deps: any, prevDeps: any): boolean {
   return false
 }
 
-async function restartServer(server: ViteDevServer) {
+async function restartServer(server: grugDevServer) {
   await server.close()
-  ;(global as any).__vite_start_time = Date.now()
+  ;(global as any).__grug_start_time = Date.now()
   server = await createServer(server.config.inlineConfig)
   await server.listen()
 }

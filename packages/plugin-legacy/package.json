@@ -1,5 +1,5 @@
 {
-  "name": "@vitejs/plugin-legacy",
+  "name": "@delaneyj/plugin-legacy",
   "version": "1.2.1",
   "license": "MIT",
   "author": "Evan You",
@@ -18,12 +18,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vitejs/vite.git"
+    "url": "git+https://github.com/delaneyj/grug.git"
   },
   "bugs": {
-    "url": "https://github.com/vitejs/vite/issues"
+    "url": "https://github.com/delaneyj/grug/issues"
   },
-  "homepage": "https://github.com/vitejs/vite/tree/main/packages/plugin-legacy#readme",
+  "homepage": "https://github.com/delaneyj/grug/tree/main/packages/plugin-legacy#readme",
   "dependencies": {
     "@babel/standalone": "^7.12.12",
     "core-js": "^3.8.2",
@@ -31,6 +31,6 @@
     "systemjs": "^6.8.3"
   },
   "peerDependencies": {
-    "vite": "^2.0.0-beta.12"
+    "grug": "^2.0.0-beta.12"
   }
 }

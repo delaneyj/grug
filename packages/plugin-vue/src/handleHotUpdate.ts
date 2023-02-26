@@ -6,12 +6,12 @@ import {
   setPrevDescriptor
 } from './utils/descriptorCache'
 import { getResolvedScript, setResolvedScript } from './script'
-import { ModuleNode, HmrContext } from 'vite'
+import { ModuleNode, HmrContext } from 'grug'
 
-const debug = _debug('vite:hmr')
+const debug = _debug('grug:hmr')
 
 /**
- * Vite-specific HMR handling
+ * grug-specific HMR handling
  */
 export async function handleHotUpdate({
   file,

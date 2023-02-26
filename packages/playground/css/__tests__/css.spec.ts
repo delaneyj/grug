@@ -75,7 +75,7 @@ test('css modules', async () => {
   expect(await getColor(imported)).toBe('turquoise')
 
   // check if the generated CSS module class name is indeed using the
-  // format specified in vite.config.js
+  // format specified in grug.config.js
   expect(await imported.getAttribute('class')).toMatch(
     /.mod-module__apply-color___[\w-]{5}/
   )

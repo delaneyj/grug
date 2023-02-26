@@ -1,4 +1,4 @@
-import Theme from 'vitepress/theme'
+import Theme from 'grugpress/theme'
 import { h } from 'vue'
 import sponsors from './sponsors.json'
 import './sponsors.css'

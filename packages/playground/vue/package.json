@@ -3,15 +3,15 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "debug": "node --inspect-brk ../../vite/bin/vite"
+    "dev": "grug",
+    "build": "grug build",
+    "debug": "node --inspect-brk ../../grug/bin/grug"
   },
   "dependencies": {
     "vue": "^3.0.5"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.0.0",
+    "@delaneyj/plugin-vue": "^1.0.0",
     "@vue/compiler-sfc": "^3.0.5",
     "js-yaml": "^3.14.1",
     "less": "^3.13.0",

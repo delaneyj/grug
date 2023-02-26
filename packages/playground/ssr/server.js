@@ -21,13 +21,13 @@ function getIndexTemplate(url) {
   // TODO handle plugin indexHtmlTransforms?
   const reactPreamble = url.startsWith('/react')
     ? `<script type="module">${
-        require('@vitejs/plugin-react-refresh').preambleCode
+        require('@delaneyj/plugin-react-refresh').preambleCode
       }</script>`
     : ''
 
-  // during dev, inject vite client + always read fresh index.html
+  // during dev, inject grug client + always read fresh index.html
   return (
-    `<script type="module" src="/@vite/client"></script>` +
+    `<script type="module" src="/@grug/client"></script>` +
     reactPreamble +
     fs.readFileSync('index.html', 'utf-8')
   )
@@ -37,17 +37,17 @@ async function startServer() {
   const app = express()
 
   /**
-   * @type {import('vite').ViteDevServer}
+   * @type {import('grug').grugDevServer}
    */
-  let vite
+  let grug
   if (!isProd) {
-    vite = await require('vite').createServer({
+    grug = await require('grug').createServer({
       server: {
         middlewareMode: true
       }
     })
-    // use vite's connect instance as middleware
-    app.use(vite.middlewares)
+    // use grug's connect instance as middleware
+    app.use(grug.middlewares)
   } else {
     app.use(require('compression')())
     app.use(require('serve-static')('dist/client', { index: false }))
@@ -58,7 +58,7 @@ async function startServer() {
       const { render } = isProd
         ? // @ts-ignore
           require('./dist/server/entry-server.js')
-        : await vite.ssrLoadModule('/src/entry-server.ts')
+        : await grug.ssrLoadModule('/src/entry-server.ts')
 
       const [appHtml, preloadLinks] = await render(req.originalUrl, manifest)
 
@@ -69,7 +69,7 @@ async function startServer() {
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (e) {
-      !isProd && vite.ssrFixStacktrace(e)
+      !isProd && grug.ssrFixStacktrace(e)
       console.log(e.stack)
       next(e)
     }

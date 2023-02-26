@@ -13,7 +13,7 @@ function testPage(isNested: boolean) {
 
   test('tags transform', async () => {
     const el = await page.$('head meta[name=description]')
-    expect(await el.getAttribute('content')).toBe('a vite app')
+    expect(await el.getAttribute('content')).toBe('a grug app')
 
     const kw = await page.$('head meta[name=keywords]')
     expect(await kw.getAttribute('content')).toBe('es modules')
@@ -79,8 +79,8 @@ describe('main', () => {
 
 describe('nested', () => {
   beforeAll(async () => {
-    // viteTestUrl is globally injected in scripts/jestPerTestSetup.ts
-    await page.goto(viteTestUrl + '/nested/')
+    // grugTestUrl is globally injected in scripts/jestPerTestSetup.ts
+    await page.goto(grugTestUrl + '/nested/')
   })
 
   testPage(true)
@@ -88,8 +88,8 @@ describe('nested', () => {
 
 describe('nested w/ query', () => {
   beforeAll(async () => {
-    // viteTestUrl is globally injected in scripts/jestPerTestSetup.ts
-    await page.goto(viteTestUrl + '/nested/index.html?v=1')
+    // grugTestUrl is globally injected in scripts/jestPerTestSetup.ts
+    await page.goto(grugTestUrl + '/nested/index.html?v=1')
   })
 
   testPage(true)

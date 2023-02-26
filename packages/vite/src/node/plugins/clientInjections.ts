@@ -12,7 +12,7 @@ const normalizedClientEntry = normalizePath(CLIENT_ENTRY)
  */
 export function clientInjectionsPlugin(config: ResolvedConfig): Plugin {
   return {
-    name: 'vite:client-inject',
+    name: 'grug:client-inject',
     transform(code, id) {
       if (id === normalizedClientEntry) {
         let options = config.server.hmr

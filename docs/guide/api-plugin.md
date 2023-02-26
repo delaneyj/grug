@@ -1,13 +1,13 @@
 # Plugin API
 
-Vite plugins extends Rollup's well-designed plugin interface with a few extra vite-specific options. As a result, you can write a Vite plugin once and have it work for both dev and build.
+grug plugins extends Rollup's well-designed plugin interface with a few extra grug-specific options. As a result, you can write a grug plugin once and have it work for both dev and build.
 
 **It is recommended to go through [Rollup's plugin documentation](https://rollupjs.org/guide/en/#plugin-development) first before reading the sections below.**
 
 ## Simple Examples
 
 :::tip
-It is common convention to author a Vite/Rollup plugin as a factory function that returns the actual plugin object. The function can accept options which allows users to customize the behavior of the plugin.
+It is common convention to author a grug/Rollup plugin as a factory function that returns the actual plugin object. The function can accept options which allows users to customize the behavior of the plugin.
 :::
 
 ### Serving a Virtual File
@@ -55,7 +55,7 @@ export default function myPlugin() {
 
 ## Universal Hooks
 
-During dev, the Vite dev server creates a plugin container that invokes [Rollup Build Hooks](https://rollupjs.org/guide/en/#build-hooks) the same way Rollup does it.
+During dev, the grug dev server creates a plugin container that invokes [Rollup Build Hooks](https://rollupjs.org/guide/en/#build-hooks) the same way Rollup does it.
 
 The following hooks are called once on server start:
 
@@ -73,20 +73,20 @@ The following hooks are called when the server is closed:
 - [`buildEnd`](https://rollupjs.org/guide/en/#buildend)
 - [`closeBundle`](https://rollupjs.org/guide/en/#closebundle)
 
-Note that the [`moduleParsed`](https://rollupjs.org/guide/en/#moduleparsed) hook is **not** called during dev, because Vite avoids full AST parses for better performance.
+Note that the [`moduleParsed`](https://rollupjs.org/guide/en/#moduleparsed) hook is **not** called during dev, because grug avoids full AST parses for better performance.
 
-[Output Generation Hooks](https://rollupjs.org/guide/en/#output-generation-hooks) (except `closeBundle`) are **not** called during dev. You can think of Vite's dev server as only calling `rollup.rollup()` without calling `bundle.generate()`.
+[Output Generation Hooks](https://rollupjs.org/guide/en/#output-generation-hooks) (except `closeBundle`) are **not** called during dev. You can think of grug's dev server as only calling `rollup.rollup()` without calling `bundle.generate()`.
 
-## Vite Specific Hooks
+## grug Specific Hooks
 
-Vite plugins can also provide hooks that serve Vite-specific purposes. These hooks are ignored by Rollup.
+grug plugins can also provide hooks that serve grug-specific purposes. These hooks are ignored by Rollup.
 
 ### `config`
 
 - **Type:** `(config: UserConfig) => UserConfig | null | void`
 - **Kind:** `sync`, `sequential`
 
-  Modify Vite config before it's resolved. The hook receives the raw user config (CLI options merged with config file). It can return a partial config object that will be deeply merged into existing config, or directly mutate the config (if the default merging cannot achieve the desired result).
+  Modify grug config before it's resolved. The hook receives the raw user config (CLI options merged with config file). It can return a partial config object that will be deeply merged into existing config, or directly mutate the config (if the default merging cannot achieve the desired result).
 
   **Example**
 
@@ -119,7 +119,7 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
 - **Type:** `(config: ResolvedConfig) => void`
 - **Kind:** `sync`, `sequential`
 
-  Called after the Vite config is resolved. Use this hook to read and store the final resolved config. It is also useful when the plugin needs to do something different based the command is being run.
+  Called after the grug config is resolved. Use this hook to read and store the final resolved config. It is also useful when the plugin needs to do something different based the command is being run.
 
   **Example:**
 
@@ -149,9 +149,9 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
 
 ### `configureServer`
 
-- **Type:** `(server: ViteDevServer) => (() => void) | void | Promise<(() => void) | void>`
+- **Type:** `(server: grugDevServer) => (() => void) | void | Promise<(() => void) | void>`
 - **Kind:** `async`, `sequential`
-- **See also:** [ViteDevServer](./api-javascript#vitedevserver)
+- **See also:** [grugDevServer](./api-javascript#grugdevserver)
 
   Hook for configuring the dev server. The most common use case is adding custom middlewares to the internal [connect](https://github.com/senchalabs/connect) app:
 
@@ -213,7 +213,7 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
 - **Type:** `IndexHtmlTransformHook | { enforce?: 'pre' | 'post' transform: IndexHtmlTransformHook }`
 - **Kind:** `async`, `sequential`
 
-  Dedicated hook for transforming `index.html`. The hook receives the current HTML string and a transform context. The context exposes the [`ViteDevServer`](./api-javascript#vitedevserver) instance during dev, and exposes the Rollup output bundle during build.
+  Dedicated hook for transforming `index.html`. The hook receives the current HTML string and a transform context. The context exposes the [`grugDevServer`](./api-javascript#grugdevserver) instance during dev, and exposes the Rollup output bundle during build.
 
   The hook can be async and can return one of the following:
 
@@ -245,7 +245,7 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
     ctx: {
       path: string
       filename: string
-      server?: ViteDevServer
+      server?: grugDevServer
       bundle?: import('rollup').OutputBundle
       chunk?: import('rollup').OutputChunk
     }
@@ -285,7 +285,7 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
     timestamp: number
     modules: Array<ModuleNode>
     read: () => string | Promise<string>
-    server: ViteDevServer
+    server: grugDevServer
   }
   ```
 
@@ -322,15 +322,15 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
 
 ## Plugin Ordering
 
-A Vite plugin can additionally specify an `enforce` property (similar to webpack loaders) to adjust its application order. The value of `enforce` can be either `"pre"` or `"post"`. The resolved plugins will be in the following order:
+A grug plugin can additionally specify an `enforce` property (similar to webpack loaders) to adjust its application order. The value of `enforce` can be either `"pre"` or `"post"`. The resolved plugins will be in the following order:
 
 - Alias
 - User plugins with `enforce: 'pre'`
-- Vite core plugins
+- grug core plugins
 - User plugins without enforce value
-- Vite build plugins
+- grug build plugins
 - User plugins with `enforce: 'post'`
-- Vite post build plugins (minify, manifest, reporting)
+- grug post build plugins (minify, manifest, reporting)
 
 ## Conditional Application
 
@@ -347,19 +347,19 @@ function myPlugin() {
 
 ## Rollup Plugin Compatibility
 
-A fair number of Rollup plugins will work directly as a Vite plugin (e.g. `@rollup/plugin-alias` or `@rollup/plugin-json`), but not all of them, since some plugin hooks do not make sense in an unbundled dev server context.
+A fair number of Rollup plugins will work directly as a grug plugin (e.g. `@rollup/plugin-alias` or `@rollup/plugin-json`), but not all of them, since some plugin hooks do not make sense in an unbundled dev server context.
 
-In general, as long as a rollup plugin fits the following criterias then it should just work as a Vite plugin:
+In general, as long as a rollup plugin fits the following criterias then it should just work as a grug plugin:
 
 - It doesn't use the [`moduleParsed`](https://rollupjs.org/guide/en/#moduleparsed) hook.
 - It doesn't have strong coupling between bundle-phase hooks and output-phase hooks.
 
 If a Rollup plugin only makes sense for the build phase, then it can be specified under `build.rollupOptions.plugins` instead.
 
-You can also augment an existing Rollup plugin with Vite-only properties:
+You can also augment an existing Rollup plugin with grug-only properties:
 
 ```js
-// vite.config.js
+// grug.config.js
 import example from 'rollup-plugin-example'
 
 export default {
@@ -373,4 +373,4 @@ export default {
 }
 ```
 
-Check out [Vite Rollup Plugins](https://vite-rollup-plugins.patak.dev) for a list of compatible official rollup plugins with usage instructions.
+Check out [grug Rollup Plugins](https://grug-rollup-plugins.patak.dev) for a list of compatible official rollup plugins with usage instructions.

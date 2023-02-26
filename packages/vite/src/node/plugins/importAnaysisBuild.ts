@@ -13,12 +13,12 @@ import { chunkToEmittedCssFileMap } from './css'
  * target is not native es - so that injected helper logic can be conditinally
  * dropped.
  */
-export const isModernFlag = `__VITE_IS_MODERN__`
+export const isModernFlag = `__grug_IS_MODERN__`
 
-const preloadHelperId = 'vite/preload-helper'
-const preloadMethod = `__vitePreload`
+const preloadHelperId = 'grug/preload-helper'
+const preloadMethod = `__grugPreload`
 const preloadCode = `const seen = {};export const ${preloadMethod} = ${preload.toString()}`
-const preloadMarker = `__VITE_PRELOAD__`
+const preloadMarker = `__grug_PRELOAD__`
 const preloadMarkerRE = new RegExp(`,?"${preloadMarker}"`, 'g')
 
 /**
@@ -27,7 +27,7 @@ const preloadMarkerRE = new RegExp(`,?"${preloadMarker}"`, 'g')
  */
 function preload(baseModule: () => Promise<{}>, deps?: string[]) {
   // @ts-ignore
-  if (!__VITE_IS_MODERN__ || !deps) {
+  if (!__grug_IS_MODERN__ || !deps) {
     return baseModule()
   }
   return Promise.all(
@@ -73,7 +73,7 @@ export function buildImportAnalysisPlugin(config: ResolvedConfig): Plugin {
   const ssr = !!config.build.ssr
 
   return {
-    name: 'vite:import-analysis',
+    name: 'grug:import-analysis',
 
     resolveId(id) {
       if (id === preloadHelperId) {
@@ -158,7 +158,7 @@ export function buildImportAnalysisPlugin(config: ResolvedConfig): Plugin {
     renderChunk(code, _, { format }) {
       // make sure we only perform the preload logic in modern builds.
       if (code.indexOf(isModernFlag) > -1) {
-        return code.replace(/__VITE_IS_MODERN__/g, String(format === 'es'))
+        return code.replace(/__grug_IS_MODERN__/g, String(format === 'es'))
       }
       return null
     },

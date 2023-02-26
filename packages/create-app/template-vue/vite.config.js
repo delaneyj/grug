@@ -1,7 +1,7 @@
-import vue from '@vitejs/plugin-vue'
+import vue from '@delaneyj/plugin-vue'
 
 /**
- * @type {import('vite').UserConfig}
+ * @type {import('grug').UserConfig}
  */
 export default {
   plugins: [vue()]

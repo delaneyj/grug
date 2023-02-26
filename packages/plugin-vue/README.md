@@ -1,10 +1,10 @@
-# @vitejs/plugin-vue [![npm](https://img.shields.io/npm/v/@vitejs/plugin-vue.svg)](https://npmjs.com/package/@vitejs/plugin-vue)
+# @delaneyj/plugin-vue [![npm](https://img.shields.io/npm/v/@delaneyj/plugin-vue.svg)](https://npmjs.com/package/@delaneyj/plugin-vue)
 
-Note: requires `@vue/compiler-sfc` as peer dependency. This is largely a port of `rollup-plugin-vue` with some vite-specific tweaks.
+Note: requires `@vue/compiler-sfc` as peer dependency. This is largely a port of `rollup-plugin-vue` with some grug-specific tweaks.
 
 ```js
-// vite.config.js
-import vue from '@vitejs/plugin-vue'
+// grug.config.js
+import vue from '@delaneyj/plugin-vue'
 
 export default {
   plugins: [vue()]
@@ -31,7 +31,7 @@ export interface Options {
 ## Example for passing options to `@vue/compiler-dom`:
 
 ```ts
-import vue from '@vitejs/plugin-vue'
+import vue from '@delaneyj/plugin-vue'
 
 export default {
   plugins: [
@@ -49,7 +49,7 @@ export default {
 ## Example for transforming custom blocks
 
 ```ts
-import vue from '@vitejs/plugin-vue'
+import vue from '@delaneyj/plugin-vue'
 
 const vueI18nPlugin = {
   name: 'vue-i18n',

@@ -1,6 +1,6 @@
 @import './sass-at-import.scss';
 
 .sass {
-  /* injected via vite.config.js */
+  /* injected via grug.config.js */
   color: $injectedColor;
 }

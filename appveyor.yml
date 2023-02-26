@@ -9,7 +9,7 @@ test_script:
   - git --version
   - node --version
   - yarn --version
-  - cd packages\vite && yarn build
+  - cd packages\grug && yarn build
   - cd packages\plugin-vue && yarn build
   - yarn test
 

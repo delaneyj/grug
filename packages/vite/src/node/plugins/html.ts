@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { Plugin } from '../plugin'
-import { ViteDevServer } from '../server'
+import { grugDevServer } from '../server'
 import { OutputAsset, OutputBundle, OutputChunk } from 'rollup'
 import { cleanUrl, isExternalUrl, isDataUrl, generateCodeFrame } from '../utils'
 import { ResolvedConfig } from '../config'
@@ -19,7 +19,7 @@ export const scriptModuleRE = /(<script\b[^>]*type\s*=\s*(?:"module"|'module')[^
 
 export function htmlPlugin(): Plugin {
   return {
-    name: 'vite:html',
+    name: 'grug:html',
 
     resolveId(id) {
       if (htmlProxyRE.test(id)) {
@@ -68,7 +68,7 @@ export function buildHtmlPlugin(config: ResolvedConfig): Plugin {
     isExternalUrl(url) || isDataUrl(url) || checkPublicFile(url, config.root)
 
   return {
-    name: 'vite:build-html',
+    name: 'grug:build-html',
 
     async transform(html, id) {
       if (id.endsWith('.html')) {
@@ -104,7 +104,7 @@ export function buildHtmlPlugin(config: ResolvedConfig): Plugin {
         const s = new MagicString(html)
         const assetUrls: AttributeNode[] = []
         let inlineModuleIndex = -1
-        const viteHtmlTransform: NodeTransform = (node) => {
+        const grugHtmlTransform: NodeTransform = (node) => {
           if (node.type !== NodeTypes.ELEMENT) {
             return
           }
@@ -186,7 +186,7 @@ export function buildHtmlPlugin(config: ResolvedConfig): Plugin {
 
         try {
           transform(ast, {
-            nodeTransforms: [viteHtmlTransform]
+            nodeTransforms: [grugHtmlTransform]
           })
         } catch (e) {
           this.error(formatError(e))
@@ -360,7 +360,7 @@ export interface IndexHtmlTransformContext {
    * filename on disk
    */
   filename: string
-  server?: ViteDevServer
+  server?: grugDevServer
   bundle?: OutputBundle
   chunk?: OutputChunk
 }
@@ -402,7 +402,7 @@ export async function applyHtmlTransforms(
   path: string,
   filename: string,
   hooks: IndexHtmlTransformHook[],
-  server?: ViteDevServer,
+  server?: grugDevServer,
   bundle?: OutputBundle,
   chunk?: OutputChunk
 ): Promise<string> {

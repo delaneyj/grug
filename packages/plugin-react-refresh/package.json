@@ -1,5 +1,5 @@
 {
-  "name": "@vitejs/plugin-react-refresh",
+  "name": "@delaneyj/plugin-react-refresh",
   "version": "1.1.2",
   "license": "MIT",
   "author": "Evan You",
@@ -18,12 +18,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vitejs/vite.git"
+    "url": "git+https://github.com/delaneyj/grug.git"
   },
   "bugs": {
-    "url": "https://github.com/vitejs/vite/issues"
+    "url": "https://github.com/delaneyj/grug/issues"
   },
-  "homepage": "https://github.com/vitejs/vite/tree/main/packages/plugin-react-refresh#readme",
+  "homepage": "https://github.com/delaneyj/grug/tree/main/packages/plugin-react-refresh#readme",
   "dependencies": {
     "@babel/core": "^7.12.10",
     "@babel/plugin-syntax-import-meta": "^7.10.4",

@@ -1,8 +1,8 @@
 // @ts-check
-import preactRefresh from '@prefresh/vite'
+import preactRefresh from '@prefresh/grug'
 
 /**
- * @type { import('vite').UserConfig }
+ * @type { import('grug').UserConfig }
  */
 const config = {
   esbuild: {

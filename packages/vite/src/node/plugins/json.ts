@@ -44,7 +44,7 @@ export interface RollupJsonOptions {
   namedExports?: boolean
 }
 
-// Custom json filter for vite
+// Custom json filter for grug
 const jsonExtRE = new RegExp(`\\.json($|\\?)`)
 
 export function jsonPlugin(options: RollupJsonOptions = {}): Plugin {
@@ -52,7 +52,7 @@ export function jsonPlugin(options: RollupJsonOptions = {}): Plugin {
   const indent = 'indent' in options ? options.indent : '\t'
 
   return {
-    name: 'vite:json',
+    name: 'grug:json',
 
     transform(json, id) {
       if (!jsonExtRE.test(id) || !filter(id)) return null

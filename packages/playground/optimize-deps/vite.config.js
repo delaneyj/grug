@@ -1,7 +1,7 @@
-const vue = require('@vitejs/plugin-vue')
+const vue = require('@delaneyj/plugin-vue')
 
 /**
- * @type {import('vite').UserConfig}
+ * @type {import('grug').UserConfig}
  */
 module.exports = {
   dedupe: ['react'],

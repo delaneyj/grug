@@ -5,7 +5,7 @@ import { ServerOptions } from './server'
 import { createLogger, LogLevel } from './logger'
 import { resolveConfig } from '.'
 
-const cli = cac('vite')
+const cli = cac('grug')
 
 // global options
 interface GlobalCLIOptions {

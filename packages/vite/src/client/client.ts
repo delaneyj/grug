@@ -31,13 +31,13 @@ Object.keys(defines).forEach((key) => {
   }
 })
 
-console.log('[vite] connecting...')
+console.log('[grug] connecting...')
 
 // use server configuration, then fallback to inference
 const socketProtocol =
   __HMR_PROTOCOL__ || (location.protocol === 'https:' ? 'wss' : 'ws')
 const socketHost = `${__HMR_HOSTNAME__ || location.hostname}:${__HMR_PORT__}`
-const socket = new WebSocket(`${socketProtocol}://${socketHost}`, 'vite-hmr')
+const socket = new WebSocket(`${socketProtocol}://${socketHost}`, 'grug-hmr')
 
 function warnFailedFetch(err: Error, path: string | string[]) {
   if (!err.message.match('fetch')) {
@@ -60,7 +60,7 @@ let isFirstUpdate = true
 async function handleMessage(payload: HMRPayload) {
   switch (payload.type) {
     case 'connected':
-      console.log(`[vite] connected.`)
+      console.log(`[grug] connected.`)
       // proxy(nginx, docker) hmr ws maybe caused timeout,
       // so send ping package let ws keep alive.
       setInterval(() => socket.send('ping'), __HMR_TIMEOUT__)
@@ -92,7 +92,7 @@ async function handleMessage(payload: HMRPayload) {
               `${path}${path.includes('?') ? '&' : '?'}t=${timestamp}`
             )
           }
-          console.log(`[vite] css hot updated: ${path}`)
+          console.log(`[grug] css hot updated: ${path}`)
         }
       })
       break
@@ -135,7 +135,7 @@ async function handleMessage(payload: HMRPayload) {
       if (enableOverlay) {
         createErrorOverlay(err)
       } else {
-        console.error(`[vite] Internal Server Error\n${err.stack}`)
+        console.error(`[grug] Internal Server Error\n${err.stack}`)
       }
       break
     default:
@@ -184,7 +184,7 @@ async function queueUpdate(p: Promise<(() => void) | undefined>) {
 
 // ping server
 socket.addEventListener('close', () => {
-  console.log(`[vite] server connection lost. polling for restart...`)
+  console.log(`[grug] server connection lost. polling for restart...`)
   setInterval(() => {
     fetch('/')
       .then(() => {
@@ -263,7 +263,7 @@ async function fetchUpdate({ path, acceptedPath, timestamp }: Update) {
   if (!mod) {
     // In a code-splitting project,
     // it is common that the hot-updating module is not loaded yet.
-    // https://github.com/vitejs/vite/issues/721
+    // https://github.com/delaneyj/grug/issues/721
     return
   }
 
@@ -298,7 +298,7 @@ async function fetchUpdate({ path, acceptedPath, timestamp }: Update) {
       const [path, query] = dep.split(`?`)
       try {
         const newMod = await import(
-          /* @vite-ignore */
+          /* @grug-ignore */
           path + `?import&t=${timestamp}${query ? `&${query}` : ''}`
         )
         moduleMap.set(dep, newMod)
@@ -313,7 +313,7 @@ async function fetchUpdate({ path, acceptedPath, timestamp }: Update) {
       fn(deps.map((dep) => moduleMap.get(dep)))
     }
     const loggedPath = isSelfUpdate ? path : `${acceptedPath} via ${path}`
-    console.log(`[vite] hot updated: ${loggedPath}`)
+    console.log(`[grug] hot updated: ${loggedPath}`)
   }
 }
 
@@ -440,7 +440,7 @@ export const createHotContext = (ownerPath: string) => {
 export function injectQuery(url: string, queryToInject: string) {
   // can't use pathname from URL since it may be relative like ../
   const pathname = url.replace(/#.*$/, '').replace(/\?.*$/, '')
-  const { search, hash } = new URL(url, 'http://vitejs.dev')
+  const { search, hash } = new URL(url, 'http://delaneyj.dev')
   return `${pathname}?${queryToInject}${search ? `&` + search.slice(1) : ''}${
     hash || ''
   }`

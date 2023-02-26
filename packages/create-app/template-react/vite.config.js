@@ -1,7 +1,7 @@
-import reactRefresh from '@vitejs/plugin-react-refresh'
+import reactRefresh from '@delaneyj/plugin-react-refresh'
 
 /**
- * @type { import('vite').UserConfig }
+ * @type { import('grug').UserConfig }
  */
 export default {
   plugins: [reactRefresh()]

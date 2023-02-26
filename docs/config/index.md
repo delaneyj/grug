@@ -1,45 +1,45 @@
-# Configuring Vite
+# Configuring grug
 
 ## Config File
 
 ### Config File Resolving
 
-When running `vite` from the command line, Vite will automatically try to resolve a config file named `vite.config.js` inside [project root](/guide/#project-root).
+When running `grug` from the command line, grug will automatically try to resolve a config file named `grug.config.js` inside [project root](/guide/#project-root).
 
 The most basic config file looks like this:
 
 ```js
-// vite.config.js
+// grug.config.js
 export default {
   // config options
 }
 ```
 
-Note Vite supports using ES modules syntax in the config file even if the project is not using native Node ESM via `type: "module"`. In this case the config file is auto pre-processed before load.
+Note grug supports using ES modules syntax in the config file even if the project is not using native Node ESM via `type: "module"`. In this case the config file is auto pre-processed before load.
 
 You can also explicitly specify a config file to use with the `--config` CLI option (resolved relative to `cwd`):
 
 ```bash
-vite --config my-config.js
+grug --config my-config.js
 ```
 
 ### Config Intellisense
 
-Since Vite ships with TypeScript typings, you can leverage your IDE's intellisense with jsdoc type hints:
+Since grug ships with TypeScript typings, you can leverage your IDE's intellisense with jsdoc type hints:
 
 ```js
 /**
- * type {import('vite').UserConfig}
+ * type {import('grug').UserConfig}
  */
 export default {
   // ...
 }
 ```
 
-Vite also directly supports TS config files. You can use `vite.config.ts` instead:
+grug also directly supports TS config files. You can use `grug.config.ts` instead:
 
 ```ts
-import { defineConfig } from 'vite'
+import { defineConfig } from 'grug'
 
 export default defineConfig({
   // ...
@@ -87,7 +87,7 @@ export default ({ command, mode }) => {
 
 - **Type:** ` (Plugin | Plugin[])[]`
 
-  Array of plugins to use. See [Plugin API](/guide/api-plugin) for more details on Vite plugins.
+  Array of plugins to use. See [Plugin API](/guide/api-plugin) for more details on grug plugins.
 
 ### root
 
@@ -186,13 +186,13 @@ export default ({ command, mode }) => {
 
   - Importing them from JS will return their resolved URL string (this can be overwritten if you have a `enforce: 'pre'` plugin to handle the asset type differently).
 
-  The built-in asset type list can be found [here](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/constants.ts).
+  The built-in asset type list can be found [here](https://github.com/delaneyj/grug/blob/main/packages/grug/src/node/constants.ts).
 
 ### dedupe
 
 - **Type:** `string[]`
 
-  If you have duplicated copies of the same dependency in your app (likely due to hoisting or linked packages in monorepos), use this option to force Vite to always resolve listed dependencies to the same copy (from
+  If you have duplicated copies of the same dependency in your app (likely due to hoisting or linked packages in monorepos), use this option to force grug to always resolve listed dependencies to the same copy (from
   project root).
 
 ### logLevel
@@ -206,7 +206,7 @@ export default ({ command, mode }) => {
 - **Type:** `boolean`
 - **Default:** `true`
 
-  Set to `false` to prevent Vite from clearing the terminal screen when logging certain messages. Via command line, use `--clearScreen false`.
+  Set to `false` to prevent grug from clearing the terminal screen when logging certain messages. Via command line, use `--clearScreen false`.
 
 ## Server Options
 
@@ -220,7 +220,7 @@ export default ({ command, mode }) => {
 
 - **Type:** `number`
 
-  Specify server port. Note if the port is already being used, Vite will automatically try the next available port so this may not be the actual port the server ends up listening on.
+  Specify server port. Note if the port is already being used, grug will automatically try the next available port so this may not be the actual port the server ends up listening on.
 
 ### server.strictPort
 
@@ -327,7 +327,7 @@ export default ({ command, mode }) => {
 - **Default:** `'modules'`
 - **Related:** [Browser Compatibility](/guide/build#browser-compatibility)
 
-  Browser compatibility target for the final bundle. The default value is a Vite special value, `'modules'`, which targets [browsers with native ES module support](https://caniuse.com/es6-module).
+  Browser compatibility target for the final bundle. The default value is a grug special value, `'modules'`, which targets [browsers with native ES module support](https://caniuse.com/es6-module).
 
   Another special value is 'esnext' - which only performs minimal trasnpiling (for minification compat) and assumes native dynamic imports support.
 
@@ -345,7 +345,7 @@ export default ({ command, mode }) => {
   The polyfill is auto injected into the proxy module of each `index.html` entry. If the build is configured to use a non-html custom entry via `build.rollupOptions.input`, then it is necessary to manually import the polyfill in your custom entry:
 
   ```js
-  import 'vite/dynamic-import-polyfill'
+  import 'grug/dynamic-import-polyfill'
   ```
 
   Note: the polyfill does **not** apply to [Library Mode](/guide/build#library-mode). If you need to support browsers without native dynamic import, you should probably avoid using it in your library.
@@ -391,7 +391,7 @@ export default ({ command, mode }) => {
 
 - **Type:** [`RollupOptions`](https://rollupjs.org/guide/en/#big-list-of-options)
 
-  Directly customize the underlying Rollup bundle. This is the same as options that can be exported from a Rollup config file and will be merged with Vite's internal Rollup options. See [Rollup options docs](https://rollupjs.org/guide/en/#big-list-of-options) for more details.
+  Directly customize the underlying Rollup bundle. This is the same as options that can be exported from a Rollup config file and will be merged with grug's internal Rollup options. See [Rollup options docs](https://rollupjs.org/guide/en/#big-list-of-options) for more details.
 
 ### build.commonjsOptions
 
@@ -445,7 +445,7 @@ export default ({ command, mode }) => {
 - **Type:** `boolean`
 - **Default:** `true` if `outDir` is inside `root`
 
-  By default, Vite will empty the `outDir` on build if it is inside project root. It will emit a warning if `outDir` is outside of root to avoid accidentially removing important files. You can explicitly set this option to suppress the warning. This is also available via command line as `--emptyOutDir`.
+  By default, grug will empty the `outDir` on build if it is inside project root. It will emit a warning if `outDir` is outside of root to avoid accidentially removing important files. You can explicitly set this option to suppress the warning. This is also available via command line as `--emptyOutDir`.
 
 ## Dep Optimization Options
 
@@ -467,7 +467,7 @@ export default ({ command, mode }) => {
 
 - **Type:** `Plugin[]`
 
-  By default, Vite assumes dependencies ship plain JavaScript and will not attempt to transform non-js file formats during pre-bundling. If you wish to support special file types, e.g. `.vue` files, you will need to supply the relevant plugins via this option.
+  By default, grug assumes dependencies ship plain JavaScript and will not attempt to transform non-js file formats during pre-bundling. If you wish to support special file types, e.g. `.vue` files, you will need to supply the relevant plugins via this option.
 
   Note that you will also need to include these plugins in the main `plugins` option in order to support the same file types during production build.
 

@@ -17,11 +17,11 @@ type Node = _Node & {
   end: number
 }
 
-export const ssrModuleExportsKey = `__vite_ssr_exports__`
-export const ssrImportKey = `__vite_ssr_import__`
-export const ssrDynamicImportKey = `__vite_ssr_dynamic_import__`
-export const ssrExportAllKey = `__vite_ssr_exportAll__`
-export const ssrImportMetaKey = `__vite_ssr_import_meta__`
+export const ssrModuleExportsKey = `__grug_ssr_exports__`
+export const ssrImportKey = `__grug_ssr_import__`
+export const ssrDynamicImportKey = `__grug_ssr_dynamic_import__`
+export const ssrExportAllKey = `__grug_ssr_exportAll__`
+export const ssrImportMetaKey = `__grug_ssr_import_meta__`
 
 export async function ssrTransform(
   code: string,
@@ -41,7 +41,7 @@ export async function ssrTransform(
 
   function defineImport(node: Node, source: string) {
     deps.add(source)
-    const importId = `__vite_ssr_import_${uid++}__`
+    const importId = `__grug_ssr_import_${uid++}__`
     s.appendLeft(
       node.start,
       `const ${importId} = ${ssrImportKey}(${JSON.stringify(source)})\n`

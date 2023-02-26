@@ -1,4 +1,4 @@
-import { Plugin } from 'vite'
+import { Plugin } from 'grug'
 
 export const vueI18nPlugin: Plugin = {
   name: 'vue-i18n',

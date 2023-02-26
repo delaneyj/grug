@@ -12,9 +12,9 @@ assignees: ''
 
 **⚠️ IMPORTANT ⚠️ Please check the following list before proceeding. If you ignore this issue template, your issue will be directly closed.**
 
-- [ ] Read [the docs](https://vitejs.dev/guide/).
-- [ ] Use Vite >=2.0. (1.x is no longer supported)
-- [ ] If the issue is related to 1.x -> 2.0 upgrade, read the [Migration Guide](https://vitejs.dev/guide/migration.html) first.
+- [ ] Read [the docs](https://delaneyj.dev/guide/).
+- [ ] Use grug >=2.0. (1.x is no longer supported)
+- [ ] If the issue is related to 1.x -> 2.0 upgrade, read the [Migration Guide](https://delaneyj.dev/guide/migration.html) first.
 
 ## Describe the bug
 
@@ -28,12 +28,12 @@ A reproduction is **required** unless you are absolutely sure that the the probl
 
 ## System Info
 
-- `vite` version:
+- `grug` version:
 - Operating System:
 - Node version:
 - Package manager (npm/yarn/pnpm) and version:
 
 ## Logs (Optional if provided reproduction)
 
-1. Run `vite` or `vite build` with the `--debug` flag.
+1. Run `grug` or `grug build` with the `--debug` flag.
 2. Provide the error log here.

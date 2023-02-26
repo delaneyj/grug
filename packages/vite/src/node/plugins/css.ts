@@ -21,11 +21,11 @@ import { dataToEsm } from '@rollup/pluginutils'
 import chalk from 'chalk'
 import { CLIENT_PUBLIC_PATH } from '../constants'
 import { ProcessOptions, Result, Plugin as PostcssPlugin } from 'postcss'
-import { ViteDevServer } from '../'
+import { grugDevServer } from '../'
 import { assetUrlRE, urlToBuiltUrl } from './asset'
 import MagicString from 'magic-string'
 
-// const debug = createDebugger('vite:css')
+// const debug = createDebugger('grug:css')
 
 export interface CSSOptions {
   /**
@@ -70,12 +70,12 @@ export const chunkToEmittedCssFileMap = new WeakMap<RenderedChunk, string>()
  * Plugin applied before user plugins
  */
 export function cssPlugin(config: ResolvedConfig): Plugin {
-  let server: ViteDevServer
+  let server: grugDevServer
   const moduleCache = new Map<string, Record<string, string>>()
   cssModulesCache.set(config, moduleCache)
 
   return {
-    name: 'vite:css',
+    name: 'grug:css',
 
     configureServer(_server) {
       server = _server
@@ -121,7 +121,7 @@ export function cssPlugin(config: ResolvedConfig): Plugin {
         css = await rewriteCssUrls(css, thisModule.url)
       } else {
         // if build, analyze url() asset reference
-        // account for comments https://github.com/vitejs/vite/issues/426
+        // account for comments https://github.com/delaneyj/grug/issues/426
         css = css.replace(/\/\*[\s\S]*?\*\//gm, '')
         if (cssUrlRE.test(css)) {
           css = await rewriteCssUrls(css, async (url) =>
@@ -148,7 +148,7 @@ export function cssPostPlugin(config: ResolvedConfig): Plugin {
   let hasEmitted = false
 
   return {
-    name: 'vite:css-post',
+    name: 'grug:css-post',
 
     transform(css, id, ssr) {
       if (!cssLangRE.test(id)) {
@@ -232,7 +232,7 @@ export function cssPostPlugin(config: ResolvedConfig): Plugin {
           chunkToEmittedCssFileMap.set(chunk, fileHandle)
         } else {
           // legacy build, inline css
-          const style = `__vite_style__`
+          const style = `__grug_style__`
           const injectCode =
             `var ${style} = document.createElement('style');` +
             `${style}.innerHTML = ${JSON.stringify(chunkCSS)};` +
@@ -410,7 +410,7 @@ async function compileCSS(
     if (message.type === 'dependency') {
       deps.add(message.file as string)
     } else if (message.type === 'warning') {
-      let msg = `[vite:css] ${message.text}`
+      let msg = `[grug:css] ${message.text}`
       if (message.line && message.column) {
         msg += `\n${generateCodeFrame(code, {
           line: message.line,

@@ -1,7 +1,7 @@
 import { Connect } from 'types/connect'
 import { createDebugger, prettifyUrl, timeFrom } from '../../utils'
 
-const logTime = createDebugger('vite:time')
+const logTime = createDebugger('grug:time')
 
 export function timeMiddleware(root: string): Connect.NextHandleFunction {
   return (req, res, next) => {

@@ -100,7 +100,7 @@ const nodeConfig = {
     shimDepsPlugin({
       'plugins/terser.ts': {
         src: `require.resolve('terser'`,
-        replacement: `require.resolve('vite/dist/node/terser'`
+        replacement: `require.resolve('grug/dist/node/terser'`
       },
       // chokidar -> fs-events
       'fsevents-handler.js': {
@@ -297,11 +297,11 @@ function licensePlugin() {
         )
         .join('\n---------------------------------------\n\n')
       const licenseText =
-        `# Vite core license\n` +
-        `Vite is released under the MIT license:\n\n` +
+        `# grug core license\n` +
+        `grug is released under the MIT license:\n\n` +
         coreLicense +
         `\n# Licenses of bundled dependencies\n` +
-        `The published Vite artifact additionally contains code with the following licenses:\n` +
+        `The published grug artifact additionally contains code with the following licenses:\n` +
         `${Array.from(licenses).join(', ')}\n\n` +
         `# Bundled dependencies:\n` +
         dependencyLicenseTexts

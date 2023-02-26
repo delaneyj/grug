@@ -17,7 +17,7 @@ document.querySelector('.baz').addEventListener('click', async () => {
 const arr = ['qux.js']
 const view = `/${arr[0]}`
 document.querySelector('.qux').addEventListener('click', async () => {
-  const { msg } = await import(/*@vite-ignore*/ view)
+  const { msg } = await import(/*@grug-ignore*/ view)
   text('.view', msg)
 })
 

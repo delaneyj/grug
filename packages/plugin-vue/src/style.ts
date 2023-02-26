@@ -10,7 +10,7 @@ export async function transformStyle(
   pluginContext: TransformPluginContext
 ) {
   const block = descriptor.styles[index]
-  // vite already handles pre-processors and CSS module so this is only
+  // grug already handles pre-processors and CSS module so this is only
   // applying SFC-specific transforms like scoped mode and CSS vars rewrite (v-bind(var))
   const result = await compileStyleAsync({
     ...options.style,

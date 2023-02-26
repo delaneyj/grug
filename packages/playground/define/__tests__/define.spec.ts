@@ -1,5 +1,5 @@
 test('string', async () => {
-  const defines = require('../vite.config.js').define
+  const defines = require('../grug.config.js').define
 
   expect(await page.textContent('.string')).toBe(String(defines.__STRING__))
   expect(await page.textContent('.number')).toBe(String(defines.__NUMBER__))

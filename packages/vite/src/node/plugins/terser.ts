@@ -5,8 +5,8 @@ import { Terser } from 'types/terser'
 export function terserPlugin(options: Terser.MinifyOptions): Plugin {
   const worker = new Worker(
     (basedir: string, code: string, options: Terser.MinifyOptions) => {
-      // when vite is linked, the worker thread won't share the same resolve
-      // root with vite itself, so we have to pass in the basedir and resolve
+      // when grug is linked, the worker thread won't share the same resolve
+      // root with grug itself, so we have to pass in the basedir and resolve
       // terser first.
       // eslint-disable-next-line
       const terserPath = require.resolve('terser', {
@@ -17,7 +17,7 @@ export function terserPlugin(options: Terser.MinifyOptions): Plugin {
   )
 
   return {
-    name: 'vite:terser',
+    name: 'grug:terser',
 
     async renderChunk(code, _chunk, outputOptions) {
       const res = await worker.run(__dirname, code, {

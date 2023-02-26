@@ -4,7 +4,7 @@ import WebSocket from 'ws'
 import { ErrorPayload, HMRPayload } from 'types/hmrPayload'
 import { ResolvedConfig } from '..'
 
-export const HMR_HEADER = 'vite-hmr'
+export const HMR_HEADER = 'grug-hmr'
 
 export interface WebSocketServer {
   send(payload: HMRPayload): void
@@ -27,7 +27,7 @@ export function createWebSocketServer(
       }
     })
   } else {
-    // vite dev server in middleware mode
+    // grug dev server in middleware mode
     wss = new WebSocket.Server({
       port:
         (typeof config.server.hmr === 'object' && config.server.hmr.port) ||

@@ -39,8 +39,8 @@ test('NODE_ENV', async () => {
 test('env object', async () => {
   const envText = await page.textContent('.env-object')
   expect(JSON.parse(envText)).toMatchObject({
-    VITE_EFFECTIVE_MODE_FILE_NAME: `.env.${mode}`,
-    VITE_CUSTOM_ENV_VARIABLE: '1',
+    grug_EFFECTIVE_MODE_FILE_NAME: `.env.${mode}`,
+    grug_CUSTOM_ENV_VARIABLE: '1',
     BASE_URL: '/',
     MODE: mode,
     DEV: !isBuild,

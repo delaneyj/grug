@@ -17,7 +17,7 @@ import {
   cleanUrl,
   isJSRequest
 } from '../utils'
-import { ResolvedConfig, ViteDevServer } from '..'
+import { ResolvedConfig, grugDevServer } from '..'
 import slash from 'slash'
 import { createFilter } from '@rollup/pluginutils'
 import { PartialResolvedId } from 'rollup'
@@ -40,10 +40,10 @@ function resolveExports(
 
 // special id for paths marked with browser: false
 // https://github.com/defunctzombie/package-browser-field-spec#ignore-a-module
-const browserExternalId = '__vite-browser-external'
+const browserExternalId = '__grug-browser-external'
 
 const isDebug = process.env.DEBUG
-const debug = createDebugger('vite:resolve-details', {
+const debug = createDebugger('grug:resolve-details', {
   onlyWhenFocused: true
 })
 
@@ -64,10 +64,10 @@ export function resolvePlugin(
   config?: ResolvedConfig
 ): Plugin {
   const isProduction = !!config?.isProduction
-  let server: ViteDevServer | undefined
+  let server: grugDevServer | undefined
 
   return {
-    name: 'vite:resolve',
+    name: 'grug:resolve',
 
     configureServer(_server) {
       server = _server
@@ -272,7 +272,7 @@ export function tryNodeResolve(
   isBuild = true,
   dedupe?: string[],
   dedupeRoot?: string,
-  server?: ViteDevServer
+  server?: grugDevServer
 ): PartialResolvedId | undefined {
   const deepMatch = id.match(deepImportRE)
   const pkgId = deepMatch ? deepMatch[1] || deepMatch[2] : id
@@ -306,7 +306,7 @@ export function tryNodeResolve(
             `${chalk.green(`import { ... } from "${pkg.data.name}"`)}\n\n` +
             `If the used import is not exported from the package's main entry ` +
             `and can only be attained via deep import, you can explicitly add ` +
-            `the deep import path to "optimizeDeps.include" in vite.config.js.`
+            `the deep import path to "optimizeDeps.include" in grug.config.js.`
         )
       )
     }
@@ -360,7 +360,7 @@ export function tryNodeResolve(
 
 export function tryOptimizedResolve(
   rawId: string,
-  server: ViteDevServer
+  server: grugDevServer
 ): string | undefined {
   const cacheDir = server.config.optimizeCacheDir
   const depData = server._optimizeDepsMetadata

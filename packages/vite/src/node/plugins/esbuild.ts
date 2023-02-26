@@ -14,7 +14,7 @@ import { SourceMap } from 'rollup'
 import { ResolvedConfig } from '..'
 import { createFilter } from '@rollup/pluginutils'
 
-const debug = createDebugger('vite:esbuild')
+const debug = createDebugger('grug:esbuild')
 
 // lazy start the service
 let _servicePromise: Promise<Service> | undefined
@@ -106,7 +106,7 @@ export function esbuildPlugin(options: ESBuildOptions = {}): Plugin {
   )
 
   return {
-    name: 'vite:esbuild',
+    name: 'grug:esbuild',
     async transform(code, id) {
       if (filter(id) || filter(cleanUrl(id))) {
         const result = await transformWithEsbuild(code, id, options)
@@ -133,10 +133,10 @@ export function esbuildPlugin(options: ESBuildOptions = {}): Plugin {
 
 export const buildEsbuildPlugin = (config: ResolvedConfig): Plugin => {
   return {
-    name: 'vite:esbuild-transpile',
+    name: 'grug:esbuild-transpile',
     async renderChunk(code, chunk, opts) {
-      // @ts-ignore injected by @vitejs/plugin-legacy
-      if (opts.__vite_skip_esbuild__) {
+      // @ts-ignore injected by @delaneyj/plugin-legacy
+      if (opts.__grug_skip_esbuild__) {
         return null
       }
 

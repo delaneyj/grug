@@ -9,18 +9,18 @@ import { FS_PREFIX } from '../constants'
 import { PluginContext } from 'rollup'
 import MagicString from 'magic-string'
 
-export const assetUrlRE = /__VITE_ASSET__([a-z\d]{8})__(?:(.*?)__)?/g
+export const assetUrlRE = /__grug_ASSET__([a-z\d]{8})__(?:(.*?)__)?/g
 
 // urls in JS must be quoted as strings, so when replacing them we need
 // a different regex
-const assetUrlQuotedRE = /"__VITE_ASSET__([a-z\d]{8})__(?:(.*?)__)?"/g
+const assetUrlQuotedRE = /"__grug_ASSET__([a-z\d]{8})__(?:(.*?)__)?"/g
 
 /**
  * Also supports loading plain strings with import text from './foo.txt?raw'
  */
 export function assetPlugin(config: ResolvedConfig): Plugin {
   return {
-    name: 'vite:asset',
+    name: 'grug:asset',
 
     resolveId(id) {
       if (!config.assetsInclude(cleanUrl(id))) {
@@ -183,7 +183,7 @@ async function fileToBuiltUrl(
       type: 'asset',
       source: content
     })
-    url = `__VITE_ASSET__${fileId}__${postfix ? `${postfix}__` : ``}`
+    url = `__grug_ASSET__${fileId}__${postfix ? `${postfix}__` : ``}`
   }
 
   cache.set(id, url)

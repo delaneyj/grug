@@ -1,4 +1,4 @@
-import { Plugin } from 'vite'
+import { Plugin } from 'grug'
 
 type PluginFactory = () => Plugin
 

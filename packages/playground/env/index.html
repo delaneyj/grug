@@ -3,11 +3,11 @@
 <p>import.meta.env.MODE: <code class="mode"></code></p>
 <p>import.meta.env.DEV: <code class="dev"></code></p>
 <p>import.meta.env.PROD: <code class="prod"></code></p>
-<p>import.meta.env.VITE_CUSTOM_ENV_VARIABLE: <code class="custom"></code></p>
+<p>import.meta.env.grug_CUSTOM_ENV_VARIABLE: <code class="custom"></code></p>
 <p>
-  import.meta.env.VITE_EFFECTIVE_MODE_FILE_NAME: <code class="mode-file"></code>
+  import.meta.env.grug_EFFECTIVE_MODE_FILE_NAME: <code class="mode-file"></code>
 </p>
-<p>import.meta.env.VITE_INLINE: <code class="inline"></code></p>
+<p>import.meta.env.grug_INLINE: <code class="inline"></code></p>
 <p>process.env.NODE_ENV: <code class="node-env"></code></p>
 <p>import.meta.env: <span class="pre env-object"></span></p>
 
@@ -16,9 +16,9 @@
   text('.mode', import.meta.env.MODE)
   text('.dev', import.meta.env.DEV)
   text('.prod', import.meta.env.PROD)
-  text('.custom', import.meta.env.VITE_CUSTOM_ENV_VARIABLE)
-  text('.mode-file', import.meta.env.VITE_EFFECTIVE_MODE_FILE_NAME)
-  text('.inline', import.meta.env.VITE_INLINE)
+  text('.custom', import.meta.env.grug_CUSTOM_ENV_VARIABLE)
+  text('.mode-file', import.meta.env.grug_EFFECTIVE_MODE_FILE_NAME)
+  text('.inline', import.meta.env.grug_INLINE)
   text('.node-env', process.env.NODE_ENV)
   text('.env-object', JSON.stringify(import.meta.env, null, 2))
 

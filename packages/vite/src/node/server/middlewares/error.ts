@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 import { RollupError } from 'rollup'
-import { ViteDevServer } from '../..'
+import { grugDevServer } from '../..'
 import { Connect } from 'types/connect'
 import { pad } from '../../utils'
 import strip from 'strip-ansi'
@@ -36,7 +36,7 @@ function cleanStack(stack: string) {
 }
 
 export function errorMiddleware(
-  server: ViteDevServer,
+  server: grugDevServer,
   allowNext = false
 ): Connect.ErrorHandleFunction {
   // note the 4 args must be kept for connect to treat this as error middleware

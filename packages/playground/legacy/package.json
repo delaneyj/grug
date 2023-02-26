@@ -3,12 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build --debug legacy",
-    "debug": "node --inspect-brk ../../vite/bin/vite"
+    "dev": "grug",
+    "build": "grug build --debug legacy",
+    "debug": "node --inspect-brk ../../grug/bin/grug"
   },
   "devDependencies": {
-    "@vitejs/plugin-legacy": "^1.0.0"
+    "@delaneyj/plugin-legacy": "^1.0.0"
   },
   "dependencies": {}
 }

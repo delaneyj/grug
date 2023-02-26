@@ -1,8 +1,8 @@
-# @vitejs/plugin-legacy [![npm](https://img.shields.io/npm/v/@vitejs/plugin-legacy.svg)](https://npmjs.com/package/@vitejs/plugin-legacy)
+# @delaneyj/plugin-legacy [![npm](https://img.shields.io/npm/v/@delaneyj/plugin-legacy.svg)](https://npmjs.com/package/@delaneyj/plugin-legacy)
 
-**Note: this plugin requires `vite@^2.0.0-beta.12`**.
+**Note: this plugin requires `grug@^2.0.0-beta.12`**.
 
-Vite's default browser support baseline is [Native ESM](https://caniuse.com/es6-module). This plugin provides support for legacy browsers that do not support native ESM.
+grug's default browser support baseline is [Native ESM](https://caniuse.com/es6-module). This plugin provides support for legacy browsers that do not support native ESM.
 
 By default, this plugin will:
 
@@ -15,8 +15,8 @@ By default, this plugin will:
 ## Usage
 
 ```js
-// vite.config.js
-import legacy from '@vitejs/plugin-legacy'
+// grug.config.js
+import legacy from '@delaneyj/plugin-legacy'
 
 export default {
   plugins: [
@@ -90,7 +90,7 @@ export default {
   Set to `false` to disable legacy chunks. This is only useful if you are using `modernPolyfills`, which essentially allows you to use this plugin for injecting polyfills to the modern build only:
 
   ```js
-  import legacy from '@vitejs/plugin-legacy'
+  import legacy from '@delaneyj/plugin-legacy'
 
   export default {
     plugins: [
@@ -115,7 +115,7 @@ Polyfill specifier strings for `polyfills` and `modernPolyfills` can be either o
 **Example**
 
 ```js
-import legacy from '@vitejs/plugin-legacy'
+import legacy from '@delaneyj/plugin-legacy'
 
 export default {
   plugins: [
@@ -137,7 +137,7 @@ The legacy plugin requires inline scripts for [Safari 10.1 `nomodule` fix](https
 These values can also be retrived via
 
 ```js
-const { cspHashes } = require('@vitejs/plugin-legacy')
+const { cspHashes } = require('@delaneyj/plugin-legacy')
 ```
 
 ## References

@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 /**
- * @type {import('vite').UserConfig}
+ * @type {import('grug').UserConfig}
  */
 module.exports = {
   build: {

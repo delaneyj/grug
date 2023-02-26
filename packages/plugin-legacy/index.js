@@ -1,7 +1,7 @@
 // @ts-check
 const path = require('path')
 const { createHash } = require('crypto')
-const { build } = require('vite')
+const { build } = require('grug')
 
 // lazy load babel since it's not used during dev
 let babel
@@ -14,23 +14,23 @@ const loadBabel = () => babel || (babel = require('@babel/standalone'))
 // DO NOT ALTER THIS CONTENT
 const safari10NoModuleFix = `!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",(function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()}),!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();`
 
-const legacyEntryId = 'vite-legacy-entry'
+const legacyEntryId = 'grug-legacy-entry'
 const systemJSInlineCode = `System.import(document.getElementById('${legacyEntryId}').getAttribute('data-src'))`
 
 /**
  * @param {import('.').Options} options
- * @returns {import('vite').Plugin[]}
+ * @returns {import('grug').Plugin[]}
  */
-function viteLegacyPlugin(options = {}) {
+function grugLegacyPlugin(options = {}) {
   /**
-   * @type {import('vite').ResolvedConfig}
+   * @type {import('grug').ResolvedConfig}
    */
   let config
   const targets = options.targets || 'defaults'
   const genLegacy = options.renderLegacyChunks !== false
 
   const debugFlag = process.env.DEBUG
-  const isDebug = debugFlag === 'vite:*' || debugFlag === 'vite:legacy'
+  const isDebug = debugFlag === 'grug:*' || debugFlag === 'grug:legacy'
 
   const facadeToLegacyChunkMap = new Map()
   const facadeToLegacyPolyfillMap = new Map()
@@ -63,7 +63,7 @@ function viteLegacyPlugin(options = {}) {
   }
 
   /**
-   * @type {import('vite').Plugin}
+   * @type {import('grug').Plugin}
    */
   const legacyGenerateBundlePlugin = {
     name: 'legacy-generate-polyfill-chunk',
@@ -85,7 +85,7 @@ function viteLegacyPlugin(options = {}) {
         }
         isDebug &&
           console.log(
-            `[@vitejs/plugin-legacy] modern polyfills:`,
+            `[@delaneyj/plugin-legacy] modern polyfills:`,
             modernPolyfills
           )
         await buildPolyfillChunk(
@@ -112,7 +112,7 @@ function viteLegacyPlugin(options = {}) {
 
         isDebug &&
           console.log(
-            `[@vitejs/plugin-legacy] legacy polyfills:`,
+            `[@delaneyj/plugin-legacy] legacy polyfills:`,
             legacyPolyfills
           )
 
@@ -130,7 +130,7 @@ function viteLegacyPlugin(options = {}) {
   }
 
   /**
-   * @type {import('vite').Plugin}
+   * @type {import('grug').Plugin}
    */
   const legacyPostPlugin = {
     name: 'legacy-post-process',
@@ -139,7 +139,7 @@ function viteLegacyPlugin(options = {}) {
 
     configResolved(_config) {
       if (_config.build.lib) {
-        throw new Error('@vitejs/plugin-legacy does not support library mode.')
+        throw new Error('@delaneyj/plugin-legacy does not support library mode.')
       }
       config = _config
 
@@ -194,7 +194,7 @@ function viteLegacyPlugin(options = {}) {
 
       // @ts-ignore avoid esbuild transform on legacy chunks since it produces
       // legacy-unsafe code - e.g. rewriting object properties into shorthands
-      opts.__vite_skip_esbuild__ = true
+      opts.__grug_skip_esbuild__ = true
 
       const needPolyfills =
         options.polyfills !== false && !Array.isArray(options.polyfills)
@@ -251,7 +251,7 @@ function viteLegacyPlugin(options = {}) {
       }
 
       /**
-       * @type {import('vite').HtmlTagDescriptor[]}
+       * @type {import('grug').HtmlTagDescriptor[]}
        */
       const tags = []
       const htmlFilename = chunk.facadeModuleId.replace(/\?.*$/, '')
@@ -391,7 +391,7 @@ function detectPolyfills(code, targets, list) {
  * @param {Set<string>} imports
  * @param {import('rollup').OutputBundle} bundle
  * @param {Map<string, string>} facadeToChunkMap
- * @param {import('vite').BuildOptions} buildOptions
+ * @param {import('grug').BuildOptions} buildOptions
  */
 async function buildPolyfillChunk(
   name,
@@ -438,7 +438,7 @@ async function buildPolyfillChunk(
   bundle[polyfillChunk.name] = polyfillChunk
 }
 
-const polyfillId = 'vite/legacy-polyfills'
+const polyfillId = 'grug/legacy-polyfills'
 
 /**
  * @param {Set<string>} imports
@@ -474,11 +474,11 @@ function isLegacyOutput(options) {
   )
 }
 
-module.exports = viteLegacyPlugin
+module.exports = grugLegacyPlugin
 
-viteLegacyPlugin.default = viteLegacyPlugin
+grugLegacyPlugin.default = grugLegacyPlugin
 
-viteLegacyPlugin.cpsHashes = [
+grugLegacyPlugin.cpsHashes = [
   createHash('sha256').update(safari10NoModuleFix).digest('base64'),
   createHash('sha256').update(systemJSInlineCode).digest('base64')
 ]

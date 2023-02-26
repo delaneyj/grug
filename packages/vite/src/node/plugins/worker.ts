@@ -19,7 +19,7 @@ export function webWorkerPlugin(config: ResolvedConfig): Plugin {
   const isBuild = config.command === 'build'
 
   return {
-    name: 'vite:worker',
+    name: 'grug:worker',
 
     load(id) {
       if (isBuild && isWorkerRequest(id)) {
@@ -58,7 +58,7 @@ export function webWorkerPlugin(config: ResolvedConfig): Plugin {
           }
         } else {
           // emit as separate chunk
-          url = `__VITE_ASSET__${this.emitFile({
+          url = `__grug_ASSET__${this.emitFile({
             type: 'chunk',
             id: cleanUrl(id)
           })}__`

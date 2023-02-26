@@ -1,7 +1,7 @@
 import { editFile, untilUpdated, isBuild } from '../../testUtils'
 
 test('should render', async () => {
-  expect(await page.textContent('h1')).toMatch('Hello Vite + React')
+  expect(await page.textContent('h1')).toMatch('Hello grug + React')
 })
 
 test('should update', async () => {
@@ -11,7 +11,7 @@ test('should update', async () => {
 })
 
 test('should hmr', async () => {
-  editFile('App.jsx', (code) => code.replace('Vite + React', 'Updated'))
+  editFile('App.jsx', (code) => code.replace('grug + React', 'Updated'))
   await untilUpdated(() => page.textContent('h1'), 'Hello Updated')
   // preserve state
   expect(await page.textContent('button')).toMatch('count is: 1')

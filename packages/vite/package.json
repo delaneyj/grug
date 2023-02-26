@@ -1,11 +1,11 @@
 {
-  "name": "vite",
+  "name": "grug",
   "version": "2.0.0-beta.34",
   "license": "MIT",
   "author": "Evan You",
   "description": "Native-ESM powered web dev build tool",
   "bin": {
-    "vite": "bin/vite.js"
+    "grug": "bin/grug.js"
   },
   "main": "dist/node/index.js",
   "types": "dist/node/index.d.ts",
@@ -19,12 +19,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vitejs/vite.git"
+    "url": "git+https://github.com/delaneyj/grug.git"
   },
   "bugs": {
-    "url": "https://github.com/vitejs/vite/issues"
+    "url": "https://github.com/delaneyj/grug/issues"
   },
-  "homepage": "https://github.com/vitejs/vite/tree/main/#readme",
+  "homepage": "https://github.com/delaneyj/grug/tree/main/#readme",
   "scripts": {
     "predev": "rimraf dist",
     "dev": "run-p dev-client dev-node",

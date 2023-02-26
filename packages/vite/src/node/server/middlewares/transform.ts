@@ -1,4 +1,4 @@
-import { ViteDevServer } from '..'
+import { grugDevServer } from '..'
 import { Connect } from 'types/connect'
 import { isCSSRequest, isDirectCSSRequest } from '../../plugins/css'
 import {
@@ -23,13 +23,13 @@ import {
   VALID_ID_PREFIX
 } from '../../constants'
 
-const debugCache = createDebugger('vite:cache')
+const debugCache = createDebugger('grug:cache')
 const isDebug = !!process.env.DEBUG
 
 const knownIgnoreList = new Set(['/', '/favicon.ico'])
 
 export function transformMiddleware(
-  server: ViteDevServer
+  server: grugDevServer
 ): Connect.NextHandleFunction {
   const {
     config: { root, logger },

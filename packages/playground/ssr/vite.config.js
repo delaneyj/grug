@@ -1,9 +1,9 @@
 // @ts-check
-import vuePlugin from '@vitejs/plugin-vue'
-import reactRefresh from '@vitejs/plugin-react-refresh'
+import vuePlugin from '@delaneyj/plugin-vue'
+import reactRefresh from '@delaneyj/plugin-react-refresh'
 
 /**
- * @type {import('vite').UserConfig}
+ * @type {import('grug').UserConfig}
  */
 export default {
   plugins: [vuePlugin(), reactRefresh()],

@@ -57,7 +57,7 @@ export function buildReporterPlugin(config: ResolvedConfig): Plugin {
   }
 
   return {
-    name: 'vite:size',
+    name: 'grug:size',
     writeBundle(_, output) {
       let longest = 0
       for (const file in output) {

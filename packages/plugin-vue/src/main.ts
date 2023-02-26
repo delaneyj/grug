@@ -179,7 +179,7 @@ async function genTemplateCode(
   const template = descriptor.template!
 
   // If the template is not using pre-processor AND is not using external src,
-  // compile and inline it directly in the main module. When served in vite this
+  // compile and inline it directly in the main module. When served in grug this
   // saves an extra request per SFC which can improve load performance.
   if (!template.lang && !template.src) {
     return transformTemplateInMain(
@@ -319,7 +319,7 @@ function genCSSModulesCode(
 ): string {
   const styleVar = `style${index}`
   const exposedName = typeof moduleName === 'string' ? moduleName : '$style'
-  // inject `.module` before extension so vite handles it as css module
+  // inject `.module` before extension so grug handles it as css module
   const moduleRequest = request.replace(/\.(\w+)$/, '.module.$1')
   return (
     `\nimport ${styleVar} from ${JSON.stringify(moduleRequest)}` +

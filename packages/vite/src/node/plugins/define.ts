@@ -46,7 +46,7 @@ export function buildDefinePlugin(config: ResolvedConfig): Plugin {
   )
 
   return {
-    name: 'vite:define',
+    name: 'grug:define',
     transform(code, id) {
       if (
         // exclude css and static assets for performance

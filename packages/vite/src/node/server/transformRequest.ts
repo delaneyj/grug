@@ -3,7 +3,7 @@ import path from 'path'
 import getEtag from 'etag'
 import * as convertSourceMap from 'convert-source-map'
 import { SourceDescription, SourceMap } from 'rollup'
-import { ViteDevServer } from '..'
+import { grugDevServer } from '..'
 import chalk from 'chalk'
 import {
   createDebugger,
@@ -15,9 +15,9 @@ import {
 import { checkPublicFile } from '../plugins/asset'
 import { ssrTransform } from '../ssr/ssrTransform'
 
-const debugLoad = createDebugger('vite:load')
-const debugTransform = createDebugger('vite:transform')
-const debugCache = createDebugger('vite:cache')
+const debugLoad = createDebugger('grug:load')
+const debugTransform = createDebugger('grug:transform')
+const debugCache = createDebugger('grug:cache')
 const isDebug = !!process.env.DEBUG
 
 export interface TransformResult {
@@ -38,7 +38,7 @@ export async function transformRequest(
     pluginContainer,
     moduleGraph,
     watcher
-  }: ViteDevServer,
+  }: grugDevServer,
   options: TransformOptions = {}
 ): Promise<TransformResult | null> {
   url = removeTimestampQuery(url)
